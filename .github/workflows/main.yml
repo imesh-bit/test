@@ -29,4 +29,6 @@ jobs:
       - name: Copy Artifacts to VM
         run: |
           echo "Copying Artifacts to VM..."
-          rsync -e "ssh -i <(echo '${{ secrets.VM_SSH_KEY }}')" -r dist/ ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }}:/var/www/myapp
+          echo "${{ secrets.VM_SSH_KEY }}" > ~/.ssh/private_key
+          chmod 600 ~/.ssh/private_key
+          rsync -e "ssh -i ~/.ssh/private_key" -r dist/ ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }}:/var/www/myapp
