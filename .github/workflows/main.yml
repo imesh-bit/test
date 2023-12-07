@@ -1,4 +1,4 @@
-name: Copy Artifacts to VM
+name: Deploy to Server
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  copy_to_vm:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,6 +26,9 @@ jobs:
       - name: Build Angular App
         run: ng build --configuration=production
 
+      - name: Copy Build Files to Server
+        run: scp -r -i ~/.ssh/id_rsa dist/* root@178.128.221.82:/var/www/payroll
+
       - name: Use SSH private key
         run: |
           mkdir -p ~/.ssh
@@ -34,5 +37,4 @@ jobs:
           ssh-keyscan -H 178.128.221.82 >> ~/.ssh/known_hosts
 
       - name: Deploy to Server
-        run: |
-          ssh -i ~/.ssh/id_rsa root@178.128.221.82 "echo 'Hello from GitHub Actions!'"
+        run: ssh -i ~/.ssh/id_rsa root@178.128.221.82 "echo 'Hello from GitHub Actions!'"
