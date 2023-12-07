@@ -28,5 +28,5 @@ jobs:
 
       - name: Copy Artifacts to VM
         run: |
-          echo "Copying Artifacts to VM..."
-          ssh root@178.128.221.82
+          ssh-keyscan -H 178.128.221.82 >> ~/.ssh/known_hosts
+          rsync -r dist/ root@178.128.221.82:/path/to/your/app
