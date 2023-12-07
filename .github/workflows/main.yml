@@ -31,7 +31,10 @@ jobs:
         run: ng build --prod
 
       - name: Create Temporary Private Key File
-        run: echo "${{ secrets.VM_SSH_KEY }}" | base64 --decode > /tmp/private_key
+        run: |
+           echo "${{ secrets.VM_SSH_KEY }}" > /tmp/private_key_base64
+           base64 --decode /tmp/private_key_base64 > /tmp/private_key
+
 
       - name: Copy Artifacts to VM
         run: |
