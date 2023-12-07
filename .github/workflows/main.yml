@@ -1,4 +1,4 @@
-name: Deploy to VM
+name: Build Angular App
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18  # Adjust the Node.js version based on your requirements
+          node-version: 14  # Adjust the Node.js version based on your requirements
 
       - name: Install Dependencies and Angular CLI
         run: |
@@ -25,23 +25,3 @@ jobs:
 
       - name: Build Angular App
         run: ng build --prod
-
-      - name: Copy Artifacts to VM
-        uses: softprops/action-gh-release@v1
-        with:
-          files: dist/*  # Adjust this pattern based on your build output
-          endpoint: ${{ secrets.VM_HOST }}
-          user: ${{ secrets.VM_USERNAME }}
-          key: ${{ secrets.VM_SSH_KEY }}
-          target: /path/to/your/app  # Adjust this path on your VM
-
-      - name: SSH into VM and Restart App
-        uses: appleboy/ssh-action@v0.2.0
-        with:
-          host: ${{ secrets.VM_HOST }}
-          username: ${{ secrets.VM_USERNAME }}
-          key: ${{ secrets.VM_SSH_KEY }}
-          port: 22
-          script: |
-            cd /path/to/your/app
-            pm2 restart your-app  # Adjust this based on your setup
