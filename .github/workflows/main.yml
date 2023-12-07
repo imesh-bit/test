@@ -16,7 +16,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 14  # Adjust the Node.js version based on your requirements
+          node-version: 18  # Set the required Node.js version
+          check-latest: true  # Ensure the latest version is used
 
       - name: Install Dependencies and Angular CLI
         run: |
