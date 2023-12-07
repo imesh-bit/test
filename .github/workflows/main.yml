@@ -14,10 +14,9 @@ jobs:
 
       - name: Convert OpenSSH Key to PEM
         run: |
-          # Convert OpenSSH key to PEM format
-          echo "${{ secrets.VM_SSH_KEY }}" | base64 --decode | ssh-keygen -p -m PEM > /tmp/private_key.pem
-          # Set permissions
+          echo "${{ secrets.VM_SSH_KEY }}" | tr -d '\n' | base64 --decode | ssh-keygen -p -m PEM > /tmp/private_key.pem
           chmod 600 /tmp/private_key.pem
+
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
