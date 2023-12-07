@@ -13,10 +13,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Debug Private Key
-        run: |
-          echo "${{ secrets.VM_SSH_KEY }}" | base64 --decode
-
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -30,13 +26,8 @@ jobs:
       - name: Build Angular App
         run: ng build --prod
 
-      - name: Create Temporary Private Key File
-        run: |
-           echo "${{ secrets.VM_SSH_KEY }}" > /tmp/private_key_base64
-           base64 --decode /tmp/private_key_base64 > /tmp/private_key
-
 
       - name: Copy Artifacts to VM
         run: |
           echo "Copying Artifacts to VM..."
-          scp -r -i /tmp/private_key dist/ ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }}:/var/www/myapp
+          rsync -e "ssh -i <(echo '${{ secrets.VM_SSH_KEY }}')" -r dist/ ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }}:/var/www/myapp
