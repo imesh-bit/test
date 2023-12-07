@@ -39,4 +39,5 @@ jobs:
           path: dist
 
       - name: Copy Artifacts to VM
-        run: scp -r -i ${{ secrets.VM_SSH_KEY }} dist/ ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }}:/path/to/your/app
+        run: scp -r -i ${{ secrets.VM_SSH_KEY }} dist/ ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }}:/var/www/myapp
+
