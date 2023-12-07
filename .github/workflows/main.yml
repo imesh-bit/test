@@ -26,15 +26,16 @@ jobs:
       - name: Build Angular App
         run: ng build --configuration=production
 
-      - name: Copy Build Files to Server
-        run: scp -r -i ~/.ssh/id_rsa dist/* root@178.128.221.82:/var/www/payroll
-
+   
       - name: Use SSH private key
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 178.128.221.82 >> ~/.ssh/known_hosts
+
+      - name: Copy Build Files to Server
+        run: scp -r -i ~/.ssh/id_rsa dist/* root@178.128.221.82:/var/www/payroll
 
       - name: Deploy to Server
         run: ssh -i ~/.ssh/id_rsa root@178.128.221.82 "echo 'Hello from GitHub Actions!'"
