@@ -1,0 +1,37 @@
+<div class="mainContent" fxLayout="column" style="height: 100vh; overflow: hidden; padding: 5px; ">
+    <div fxFlex="85%" style=" height: 55vh;">
+        <div fxFlex="35%" fxLayout="column" style=" display: flex; align-items: center; ">
+
+            <ngx-charts-pie-chart [view]="[500, 600]" [results]="pieChartData" [labels]="true"
+                style="position: absolute;top: -60px;">
+            </ngx-charts-pie-chart>
+
+            <h4 style="position: relative; top: 90%;">Total Employee : {{totalValue}}</h4>
+
+        </div>
+
+        <div fxLayout="column" fxFlex="60%" style=" ">
+            <h4 class="card-title border-bottom" style="padding-left: 10px; padding-top: 5px;">Age Range</h4>
+            <ngx-charts-bar-vertical [view]="[500,400]" [results]="ageRangeChartData" [xAxisLabel]="'Age'"
+                [yAxisLabel]="'Age'" [showXAxisLabel]="false" [showYAxisLabel]="false" [xAxis]="true"
+                [yAxis]="true" >
+                
+            </ngx-charts-bar-vertical>
+        </div>
+        <div fxLayout="column" fxFlex="25%" style=" text-align: center; ">
+          <h4 style="margin-bottom: 20px; margin-top: 5px;">Male vs Female</h4>
+          <div fxLayout="row" fxLayoutAlign="center start">
+            <div fxLayout="column" fxLayoutAlign="start center" style="position: relative; left: 50px;">
+              <img src="../../../assets/man.png" alt="Male Image" style="margin-bottom: 8px; height: 250px; width: 250px;">
+              <h5>Male</h5>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="start center" style="position: relative; right:  50px;">
+              <img src="../../../assets/girl.png" alt="Female Image" style="margin-bottom: 8px; height: 250px; width: 250px; size: 100%;">
+              <h5>Female</h5>
+            </div>
+          </div>
+        </div>
+        
+   
+
+</div>

@@ -1,0 +1,179 @@
+<div style="min-height: 80vh;">
+
+  <div fxLayout="column" style="padding: 10px;">
+    <div class="box-shadow-div" fxLayout="row" fxLayoutGap="5px" style="padding: 5px; padding-bottom: 5px;">
+      <div fxFlex="100%" class="input-form">
+        <form style="display: flex; flex-direction: column; max-width: 90%;">
+
+          <div fxLayout="column" fxLayoutAlign="space-between">
+            <div class="input-row ">
+              <div style="display: flex; flex-direction: row; align-items: center; width: 100%;">
+                <mat-form-field class="mat-input" appearance="outline"
+                  style="width: 24%; padding-right: 10px; padding-top: 5px;">
+                  <mat-label>Salary Month</mat-label>
+                  <mat-select matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedMonth"
+                    placeholder="Salary Month">
+                    <mat-option (click)="onActionAnable(selectedMonth)" *ngFor="let month of months"
+                      [value]="month.code">
+                      {{ month.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="mat-input" appearance="outline"
+                  style="width: 24%; padding-right: 10px; padding-top: 5px;">
+                  <mat-label>Request Type</mat-label>
+                  <mat-select matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="allowType"
+                    placeholder="Allowance type">
+                    <mat-option (click)="onActionAnableAllowtype(allowType)" *ngFor="let type of allowTypes"
+                      [value]="type">
+                      {{ type }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <!-- <div class="input-row ">
+              
+            </div> -->
+            <div class="input-row ">
+              <div style="display: flex; flex-direction: row; align-items: center; width: 100%;">
+                <mat-form-field class="mat-input" appearance="outline"
+                  style="width: 24%; padding-right: 10px; padding-top: 5px;  ">
+                  <mat-label>Allownace</mat-label>
+                  <mat-select matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedAllow"
+                    placeholder="Allownace">
+                    <mat-option *ngFor="let allow of allowances" [value]="allow.code">
+                      {{ allow.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="mat-input" appearance="outline" style="width: 24%;  padding-top: 5px;">
+                  <mat-label>Amount</mat-label>
+                  <input matInput type="number" [(ngModel)]="amount" [ngModelOptions]="{standalone: true}"
+                    placeholder="Amount">
+                </mat-form-field>
+              </div>
+            </div>
+            <!-- <div class="input-row ">
+
+            </div> -->
+            <div class="input-row ">
+              <div style="display: flex; flex-direction: row; align-items: center; width: 100%;">
+
+                <mat-form-field class="mat-input" appearance="outline" style="width: 24%;  padding-top: 5px;">
+                  <mat-label>Employee</mat-label>
+                  <input (keyup)="onKeyUp()" type="text" matInput [formControl]="employeeControl"
+                    [matAutocomplete]="auto" placeholder="Employee">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option (click)="onKeyUp()" *ngFor="let employee of filteredEmployees | async"
+                      [value]="employee">{{ employee
+                      }}</mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <mat-form-field class="mat-input" appearance="outline"
+                  style="width: 24%;  padding-top: 5px; margin-left: 10px;">
+                  <mat-label>Emp ID</mat-label>
+                  <input matInput type="text" [(ngModel)]="empId" [ngModelOptions]="{standalone: true}"
+                    placeholder="Emp ID">
+                </mat-form-field>
+              </div>
+            </div>
+            
+            <div class="input-row ">
+              <div style="width:49%;display: flex; justify-content: flex-end; padding-top: 5px;">
+                <button mat-raised-button class="success-button"
+                  style="background-color: #156EF3;margin-right: 10px; color: white; " (click)="save()">
+                  Save
+                </button>
+                <button mat-raised-button class="success-button" style="background-color: #d60035; color: white;"
+                  (click)="cancel()">
+                  Cancel
+                </button>
+
+                <!-- <label class="custom-file-input " style="background-color: #156EF3; padding: 8px;">
+                  <input type="file" (change)="onFileChange($event)" accept=".xls,.xlsx">
+                  Browse
+                </label> -->
+              </div>
+            </div>
+          </div>
+        </form>
+        <hr style="margin: 5px; border: 0; border-top: 2px solid rgb(212, 206, 206);">
+        <div fxLayout="column">
+          <div>
+            <div class="tableSection " style="padding: 10px;">
+              <!-- <div fxLaout="row" fxLayoutAlign="end" class="input-row">
+                <input placeholder="Search" type="search" class="form-control input-style" id="certName" name="certName"
+                  [(ngModel)]="searchEmp" (keyup)="onSearchKeyup()">
+
+              </div> -->
+              <table mat-table [dataSource]="serviceAllowancesDataSource" class="mat-elevation-z8 demo-table table-cell"
+                style="border-radius: 15px; overflow: hidden; width: 100%;">
+                <ng-container matColumnDef="epf">
+                  <th mat-header-cell *matHeaderCellDef class="table-header">
+                    EPF#</th>
+                  <td mat-cell *matCellDef="let element" class="table-data">{{
+                    element.epf
+                    }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="employeeName">
+                  <th mat-header-cell *matHeaderCellDef class="table-header">
+                    Employee </th>
+                  <td mat-cell *matCellDef="let element" class="table-data">{{
+                    element.employeeName }}</td>
+                </ng-container>
+                <ng-container matColumnDef="allowance">
+                  <th mat-header-cell *matHeaderCellDef class="table-header">
+                    Allowance</th>
+                  <td mat-cell *matCellDef="let element" class="table-data">{{
+                    element.allowance }}</td>
+                </ng-container>
+                <ng-container matColumnDef="month">
+                  <th mat-header-cell *matHeaderCellDef class="table-header">
+                    Division</th>
+                  <td mat-cell *matCellDef="let element" class="table-data">{{
+                    element.division
+                    }}</td>
+                </ng-container>
+                <ng-container matColumnDef="amount">
+                  <th mat-header-cell *matHeaderCellDef class="table-header">
+                    Amount</th>
+                  <td mat-cell *matCellDef="let element" class="table-data">{{
+                    element.amount
+                    }}</td>
+                </ng-container>
+                <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef class="table-header">
+                    Action</th>
+                  <td mat-cell *matCellDef="let element" class="action-cell">
+                    <mat-icon (click)=" updateData(element)" style="cursor: pointer;">edit</mat-icon>
+                    <mat-icon (click)="showDeleteConfirmation(element)" style="cursor: pointer;">delete</mat-icon>
+
+                  </td>
+
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedServiceAllowances" style="height: 50px;"></tr>
+                <tr mat-row [ngClass]="{
+                    'inactive-row': !element.activeStatus
+                  }" *matRowDef="let element; columns: displayedServiceAllowances;  let rowIndex = index"
+                  style="height: 10px; cursor: pointer; "
+                  (click)="onRowClick(rowIndex)" [ngStyle]="getRowStyle(rowIndex)"  class="hovered-row" class="hovered-row"></tr>
+              </table>
+              <div *ngIf="isLoading" class="loader">
+
+                <mat-spinner diameter="70"></mat-spinner>
+              </div>
+              <mat-paginator [length]="length" [pageIndex]="pageIndex" [pageSize]="pageSize"
+                [pageSizeOptions]="[10,20,35,50]" style="border-radius: 15px; overflow: hidden; width: 100%;"
+                (page)="getServerData($event)" aria-label="Select page of periodic elements">
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

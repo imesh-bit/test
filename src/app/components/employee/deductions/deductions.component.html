@@ -1,0 +1,105 @@
+<div style="min-height: 80vh;">
+
+  <div fxLayout="row" fxLayoutAlign="space-between" style="padding-top: 10px; padding-left: 10px;">
+    <div fxFlex class="column">
+      <h1 style="color: #2c5fac;font-weight: 500;">Deductions</h1>
+    </div>
+  </div>
+
+
+  <div fxLayout="column" style="border: 2px solid black; margin: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);">
+    <!-- <div fxLayout="row" style="padding-left: 10px;"> 
+    <mat-icon style="font-size: 32px; cursor: pointer;" (click)="save()" matTooltip="Save">save</mat-icon>
+  </div> -->
+
+    <hr style="margin: 5px; border: 0; border-top: 1px solid black;">
+
+    <div fxLayout="column" style=" padding: 10px;">
+      <div fxLayout="row">
+        <label class="label-style" style="width: 150px;">Deduction 1 :</label>
+        <input class="input-style" style="margin-left: 10px; width: 400px;" type="text" [(ngModel)]="deduct1">
+
+      </div>
+      <div fxLayout="row" style="padding-top: 10px;">
+        <label class="label-style" style="width: 150px;">Deduction 2 :</label>
+        <input class="input-style" style="margin-left: 10px; width: 400px;" type="text" [(ngModel)]="deduct2">
+
+      </div>
+      <div fxLayout="row" style="padding-top: 10px;">
+        <label class="label-style" style="width: 150px;">Deduction 3 :</label>
+        <input class="input-style" style="margin-left: 10px; width: 400px;" type="text" [(ngModel)]="deduct3">
+
+      </div>
+      <div fxLayout="row" style="padding-top: 10px;">
+        <label class="label-style" style="width: 150px;">Deduction 4 :</label>
+        <input class="input-style" style="margin-left: 10px; width: 400px;" type="text" [(ngModel)]="deduct4">
+
+      </div>
+      <div fxLayout="row" style="padding-top: 10px;">
+        <label class="label-style" style="width: 150px;">Deduction 5 :</label>
+        <input class="input-style" style="margin-left: 10px; width: 400px;" type="text" [(ngModel)]="deduct5">
+        <mat-icon class="custom-icon" style="font-size: 32px; cursor: pointer; position: relative;bottom: 4px;"
+          (click)="save()" matTooltip="Save">save</mat-icon>
+
+      </div>
+      <!-- <div fxLayout="row" style="margin-top: 10px;"> 
+      <label class="label-style">No of Working Days:</label>
+      <input class="input-style" style="margin-left: 10px;width: 100px;" type="number">
+      <label class="label-style" style="margin-left: 15px; " >No of Working Hours:</label>
+      <input class="input-style" style="margin-left: 10px; width: 100px;" type="number">
+    </div> -->
+      <!-- <div fxLayout="row" fxLayoutAlign="start center" class="form-group" style="font-family: Imprima; font-size: 16px; color: #156EF3; padding-bottom: 10px;">
+      <label for="wageBorad" class="label-width">Trade Name:</label>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1">
+        <input class="input-style" fxFlex="100" id="wageBorad" name="wageBorad" [(ngModel)]="wageBorad" style=" resize: vertical;margin-left: 10px;width: 400px;" />
+        <button mat-icon-button class="custom-button">
+          <mat-icon class="custom-icon">save</mat-icon>
+        </button>
+      </div>
+    </div> -->
+
+    </div>
+
+
+    <hr style="margin: 5px; border: 0; border-top: 1px solid black;">
+
+    <!-- <div fxLayout="row">
+    <div class="column" style="padding: 10px; width: 100%;">
+      <table mat-table [dataSource]="wageBoardDataSource" class="mat-elevation-z8 demo-table table-cell"
+        style="border-radius: 15px; overflow: hidden; width: 100%;">
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef class="table-header">
+            Deductions
+          </th>
+          <td mat-cell *matCellDef="let element" class="table-data">{{ element.name }}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef class="table-header" style="width: 10%;">
+            Action
+          </th>
+          <td mat-cell *matCellDef="let element" class="action-cell" style="text-align: center;">
+            <mat-icon (click)="updateData(element)" style="cursor: pointer;">edit</mat-icon>
+            <mat-icon (click)="updateData(element)" style="cursor: pointer;">delete</mat-icon>
+          </td>
+        </ng-container>
+
+       
+
+        <tr mat-header-row *matHeaderRowDef="displayWageBoard"></tr>
+        <tr mat-row [ngClass]="{
+            'inactive-row': !element.activeStatus
+          }" *matRowDef="let element; columns: displayWageBoard;  let rowIndex = index"
+                    style="height: 10px; cursor: pointer; " (click)="onRowClick(rowIndex)"[ngStyle]="getRowStyle(rowIndex)"  class="hovered-row"></tr>
+      </table>
+
+      <mat-paginator [length]="length" [pageIndex]="pageIndex" [pageSize]="pageSize" [pageSizeOptions]="[10,20,35,50]"
+        style="border-radius: 15px; overflow: hidden; width: 100%;" (page)="getServerData($event)"
+        aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>
+  </div> -->
+  </div>
+</div>

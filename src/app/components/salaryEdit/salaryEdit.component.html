@@ -1,0 +1,650 @@
+<div style="min-height: 80vh;">
+
+  <div fxLayout="column" >
+    <div class="box-shadow-div" fxLayout="row" fxLayoutGap="5px" style="padding: 20px; padding-bottom: 0px;">
+      <div fxFlex="100%" class="input-form" fxLayout="row">
+        <div fxFlex="25%">
+          <form style="display: flex; flex-direction: column; max-width: 100%; right: 10px;height: 880px;">
+            <div class="column" style="display: flex; flex-direction: column; align-items: start;">
+              <h1 style="font-weight: 500; color: #156EF3;">Salary Information</h1>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="space-between" class="input-form">
+
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;">
+                    <mat-label>Basic Salary</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="basicSalary"
+                      placeholder="Basic Salary" [ngModelOptions]="{standalone: true}" (keyup)="calculate()">
+                  </mat-form-field>
+
+
+                </div>
+              </div>
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  padding-top: 5px;">
+                    <mat-label>Salary Arrears</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="salary" placeholder="Salary"
+                      [ngModelOptions]="{standalone: true}" (keyup)="calculate()">
+                  </mat-form-field>
+
+                </div>
+              </div>
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  padding-top: 5px;">
+                    <mat-label>Budget Allownace 1</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="budgetAllow1"
+                      placeholder="Budget Allownace 1" [ngModelOptions]="{standalone: true}" (keyup)="calculate()"
+                      readonly>
+                  </mat-form-field>
+
+                </div>
+              </div>
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  padding-top: 5px;">
+                    <mat-label>Budget Allownace 2</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="budgetAllow2"
+                      placeholder="Budget Allownace 2" [ngModelOptions]="{standalone: true}" (keyup)="calculate()"
+                      readonly>
+                  </mat-form-field>
+
+                </div>
+              </div>
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  padding-top: 5px;">
+                    <mat-label>{{Allow3}}</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="allow3"
+                      placeholder="{{Allow3}}" [ngModelOptions]="{standalone: true}" (keyup)="calculate()" readonly>
+                  </mat-form-field>
+
+                </div>
+              </div>
+
+              <div class="input-row " style="width: 100%; padding-top: 5px;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  ">
+                    <mat-label>Total For EPF</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="totalForEpr"
+                      placeholder="Total For EPF" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+
+
+              <div class="column"
+                style=" height: 25px;display: flex; flex-direction: column; align-items: start;  padding-top: 30px;">
+                <h1 style="font-weight: 500; color: #156EF3;">Allownace</h1>
+              </div>
+              <div class="input-row " style="width: 100%; padding-top: 10px;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px; ">
+                    <mat-label>{{Allow1}}</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="allow1"
+                      placeholder="{{Allow1}}" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px; ">
+                    <mat-label>{{Allow2}}</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="allow2"
+                      placeholder="{{Allow2}}" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px; ">
+                    <mat-label>{{Allow4}}</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="allow4"
+                      placeholder="{{Allow4}}" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px; ">
+                    <mat-label>{{Allow5}}</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="allow5"
+                      placeholder="{{Allow5}}" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="column"
+                style=" height: 25px;display: flex; flex-direction: column; align-items: start;  padding-top: 5px;">
+                <h1 style="font-weight: 500; color: #156EF3;">Other</h1>
+              </div>
+              <div class="input-row " style="width: 100%;padding-top: 5px;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;">
+                    <mat-label>Bonus</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="bonus" placeholder="Bonus"
+                      [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;">
+                    <mat-label>OT</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="overPayment" placeholder="OT"
+                      [ngModelOptions]="{standalone: true}">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div fxFlex="25%">
+          <form style="display: flex; flex-direction: column; max-width: 100%; right: 10px; height: 880px;">
+
+            <div class="column" style="display: flex; flex-direction: column; align-items: start;">
+              <h1 style="font-weight: 500; color: #156EF3;">Noncash Benifit</h1>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="space-between" class="input-form">
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;">
+                    <mat-label>{{nonCashLabel1}}</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="nonCash1"
+                      placeholder="{{nonCashLabel1}}" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;">
+                    <mat-label>{{nonCashLabel2}}</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="nonCash2"
+                      placeholder="{{nonCashLabel2}}" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;">
+                    <mat-label>{{nonCashLabel3}}</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="nonCash3"
+                      placeholder="{{nonCashLabel3}}" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;">
+                    <mat-label>{{nonCashLabel4}}</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="nonCash4"
+                      placeholder="{{nonCashLabel4}}" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;">
+                    <mat-label>{{nonCashLabel5}}</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="nonCash5"
+                      placeholder="{{nonCashLabel5}}" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;">
+                    <mat-label>{{nonCashLabel6}}</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="nonCash6"
+                      placeholder="{{nonCashLabel6}}" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;">
+                    <mat-label>{{nonCashLabel7}}</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="nonCash7"
+                      placeholder="{{nonCashLabel7}}" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;">
+                    <mat-label>{{nonCashLabel8}}</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="nonCash8"
+                      placeholder="{{nonCashLabel8}}" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;">
+                    <mat-label>{{nonCashLabel9}}</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="nonCash9"
+                      placeholder="{{nonCashLabel9}}" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;">
+                    <mat-label>{{nonCashLabel10}}</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="nonCash10"
+                      placeholder="{{nonCashLabel10}}" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+
+
+              <div class="input-row " style="width: 100%; padding-top: 56.5%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <hr
+                    style="margin: 5px;margin-left: 0; margin-right: 0; margin-bottom: 0; border: 0; border-top: 1px solid black; width: 100%;">
+                </div>
+              </div>
+
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; ">
+                    <mat-label>GROSS SALARY</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="grossSalary"
+                      placeholder="GROSS SALARY" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+        <div fxFlex="25%">
+          <form style="display: flex; flex-direction: column; max-width: 100%;  height: 880px;">
+            <div class="column" style="display: flex; flex-direction: column; align-items: start;">
+              <h1 style="font-weight: 500; color: #156EF3;">Deductions</h1>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="space-between" class="input-form" style="">
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+
+
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;">
+                    <mat-label>Pay Cut</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="salaryCut"
+                      placeholder="Salary Cut" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+
+
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;">
+                    <mat-label>No Pay</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="noPayValue"
+                      placeholder="No Pay" [ngModelOptions]="{standalone: true}">
+                  </mat-form-field>
+                  <mat-form-field class="mat-input" appearance="outline"
+                    style="width: 100%; padding-top: 5px; margin-left: 5px;">
+                    <mat-label>No Pay Days</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="nopaydates"
+                      placeholder="No Pay Days" [ngModelOptions]="{standalone: true}">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+
+
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;">
+                    <mat-label>Salary Advance</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="salaryAdvance"
+                      placeholder="Salary Advance" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+
+
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  padding-top: 5px;">
+                    <mat-label>Loan</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="loan" placeholder="Loan"
+                      [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+
+
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  padding-top: 5px;">
+                    <mat-label>APIT</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="aRIT" placeholder="ARIT"
+                      [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  padding-top: 5px;">
+                    <mat-label>EPF (8%)</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="epf" placeholder="EPF (8%)"
+                      [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  padding-top: 5px;">
+                    <mat-label>{{Deduct1}}</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="deduct1"
+                      placeholder="{{Deduct1}}" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  padding-top: 5px;">
+                    <mat-label>{{Deduct2}}</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="deduct2"
+                      placeholder="{{Deduct2}}" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  padding-top: 5px;">
+                    <mat-label>{{Deduct3}}</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="deduct3"
+                      placeholder="{{Deduct3}}" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  padding-top: 5px;">
+                    <mat-label>{{Deduct4}}</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="deduct4"
+                      placeholder="{{Deduct4}}" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  padding-top: 5px;">
+                    <mat-label>{{Deduct5}}</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="deduct5"
+                      placeholder="{{Deduct5}}" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+
+              <div class="input-row " style="width: 100%;padding-top:8%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px; ">
+                    <mat-label>Total Deduction</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="totalDeduction"
+                      placeholder="Total Ddeduction" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <hr
+                    style="margin: 5px;margin-left: 0; margin-right: 0; margin-bottom: 0; border: 0; border-top: 1px solid black; width: 100%;">
+                </div>
+              </div>
+              <div class="input-row " style="width: 100%; ">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; ">
+                    <mat-label>NET SALARY</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="netSalary"
+                      placeholder="NET SALARY" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+
+
+            </div>
+          </form>
+        </div>
+        <div fxFlex="25%">
+          <form style=" display: flex; flex-direction: column; max-width: 100%; right: 10px;">
+
+            <div class="column" style="display: flex; flex-direction: column; align-items: start;">
+              <h1 style="font-weight: 500; color: #156EF3;">Other Information</h1>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="space-between" class="input-form">
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  padding-top: 5px;">
+                    <mat-label>Name</mat-label>
+                    <input matInput type="text" [(ngModel)]="name" placeholder="Name"
+                      [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline"
+                    style="width: 100%;  padding-top: 5px;margin-right: 5px;">
+                    <mat-label>EPF</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="empCode" placeholder="EPF"
+                      [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  padding-top: 5px; ">
+                    <mat-label>Emp ID</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="empId" placeholder="System Id"
+                      [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  padding-top: 5px;">
+                    <mat-label>Category</mat-label>
+                    <input matInput type="text" [(ngModel)]="category" placeholder="Category"
+                      [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  padding-top: 5px;">
+                    <mat-label>Occupation Group</mat-label>
+                    <input matInput type="text" [(ngModel)]="occupationGroup" placeholder="Occupation Group"
+                      [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  padding-top: 5px;">
+                    <mat-label>Emp Type</mat-label>
+                    <input matInput type="text" [(ngModel)]="empType" placeholder="Emp Type"
+                      [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  padding-top: 5px;">
+                    <mat-label>Division</mat-label>
+                    <input matInput type="text" [(ngModel)]="division" placeholder="Division"
+                      [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  padding-top: 5px;">
+                    <mat-label>Designation</mat-label>
+                    <input matInput type="text" [(ngModel)]="designation" placeholder="Designation"
+                      [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+
+
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  padding-top: 5px;">
+                    <mat-label>EPF (12%)</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="providentFund"
+                      placeholder="Employee Provident Fund (12%)" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="input-row " style="width: 100%;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  padding-top: 5px;">
+                    <mat-label>ETF (3%)</mat-label>
+                    <input matInput type="number" style="text-align: right;" [(ngModel)]="trustFund"
+                      placeholder="Employee Trust Fund (3%)" [ngModelOptions]="{standalone: true}" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="input-row " style="width: 100%; padding-top: 120%; position: relative; bottom: 90px;">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; ">
+                    <mat-label>Remark</mat-label>
+                    <input matInput type="text" [(ngModel)]="remark" placeholder="Remark"
+                      [ngModelOptions]="{standalone: true}">
+                  </mat-form-field>
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="box-shadow-div" fxLayout="row" fxLayoutGap="5px"
+      style="padding: 20px; padding-bottom: 5px; padding-top: 0;">
+
+      <div fxFlex="100%" class="input-form" fxLayout="row">
+        <div fxFlex="75%">
+
+          <div class="input-row " style="width: 100%;">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+              <hr
+                style="margin: 5px;margin-left: 0; margin-right: 0; margin-bottom: 0; border: 0; border-top: 1px solid black; width: 100%;">
+            </div>
+          </div>
+          <div class="input-row " style="width: 100%;">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+              <div class="column"
+                style="height: 25px; display: flex; flex-direction: column; align-items: start;padding-top: 3px;width: 33.33%;align-items: center;">
+                <h4 style="font-weight: 500; color: #156EF3;">Bank</h4>
+              </div>
+              <div class="column"
+                style="height: 25px; display: flex; flex-direction: column; align-items: start;padding-top: 3px;width: 33.33%;align-items: center;">
+                <h4 style="font-weight: 500; color: #156EF3;">Acc No</h4>
+              </div>
+              <div class="column"
+                style="height: 25px; display: flex; flex-direction: column; align-items: start;padding-top: 3px;width: 33.33%;align-items: center;">
+                <h4 style="font-weight: 500; color: #156EF3;">Amount</h4>
+              </div>
+
+            </div>
+
+          </div>
+          <div class="input-row " style="width: 100%;">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+              <hr
+                style="margin: 5px;margin-left: 0; margin-right: 0; margin-bottom: 0; border: 0; border-top: 1px solid black; width: 100%;">
+            </div>
+          </div>
+          <div class="input-row " style="width: 100%;">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+              <mat-form-field class="mat-input" appearance="outline" style="width: 70%; padding-right: 2px;">
+                <mat-label>Bank One</mat-label>
+                <input matInput type="text" [(ngModel)]="bankOne" placeholder="Bank One"
+                  [ngModelOptions]="{standalone: true}" matTooltip="{{bankOne}}" readonly>
+              </mat-form-field>
+              <mat-form-field class="mat-input" appearance="outline" style="width: 100%; ">
+                <mat-label>Acc No</mat-label>
+                <input matInput type="number" style="text-align: right;" [(ngModel)]="accountNo1"
+                  placeholder="Account No" [ngModelOptions]="{standalone: true}" matTooltip="{{accountNo1}}" readonly>
+              </mat-form-field>
+              <mat-form-field class="mat-input" appearance="outline" style="width: 70%;  padding-left: 2px;">
+                <mat-label>Amount</mat-label>
+                <input matInput type="number" style="text-align: right;" [(ngModel)]="amount1" placeholder="Amount"
+                  [ngModelOptions]="{standalone: true}" matTooltip="{{amount1}}" readonly>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="input-row " style="width: 100%;">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+              <mat-form-field class="mat-input" appearance="outline"
+                style="width: 70%;  padding-top: 5px;padding-right: 2px;">
+                <mat-label>Bank Two</mat-label>
+                <input matInput type="text" [(ngModel)]="bankTwo" placeholder="Bank Two"
+                  [ngModelOptions]="{standalone: true}" matTooltip="{{bankTwo}}" readonly>
+              </mat-form-field>
+              <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  padding-top: 5px;">
+                <mat-label>Acc No</mat-label>
+                <input matInput type="number" style="text-align: right;" [(ngModel)]="accountNo2"
+                  placeholder="Account No" [ngModelOptions]="{standalone: true}" matTooltip="{{accountNo2}}" readonly>
+              </mat-form-field>
+              <mat-form-field class="mat-input" appearance="outline"
+                style="width: 70%;  padding-top: 5px;padding-left: 2px;">
+                <mat-label>Amount</mat-label>
+                <input matInput type="number" style="text-align: right;" [(ngModel)]="amount2" placeholder="Amount"
+                  [ngModelOptions]="{standalone: true}" matTooltip="{{amount2}}" readonly>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div fxFlex="25%">
+
+          <div class="input-row " style="padding-top: 0px; width: 100%;">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+              <div style="width: 100%; padding-top: 50%; display: flex; justify-content: center;">
+                <button mat-raised-button class="success-button"
+                  style="margin-right: 10px;background-color: #156EF3; color: white;" (click)="save()">Save</button>
+                <button mat-raised-button class="success-button" style="background-color: #d60035; color: white; "
+                  (click)="close()">Close</button>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

@@ -1,0 +1,203 @@
+.box-shadow-div {
+    background: #edf1f7;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    padding: 5px;
+    padding-top: 0;
+    border-radius: 8px;
+  }
+  .invalid-email {
+    border-color: 1px solid red ; /* Change this to your desired border color */
+  }
+  
+  .user-image {
+    width: 180px;
+    height: 180px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .user-image:hover {
+    transform: scale(1.05);
+  }
+  
+  .custom-icon {
+    color: #156EF3;
+    cursor: pointer;
+    border: none;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+    width: 30px;
+    height: 30px;
+  }
+  
+  .custom-file-input input[type="file"] {
+    display: none;
+  }
+  
+  .custom-file-input {
+    display: inline-block;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    position: relative;
+    overflow: hidden;
+    max-width: 150px;
+  }
+  .hovered-row:hover {
+    background-color: #e6f7ff !important; /* Set the hover color as per your preference */
+  }
+  .custom-file-input label {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    padding-right: 20px;
+  }
+  
+  .custom-file-input::before {
+    content: "\f07b";
+    font-family: FontAwesome;
+    font-size: 18px;
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+  }
+  
+  .custom-file-input:hover {
+    background-color: #e0e0e0;
+    border-color: #999;
+  }
+  
+  .label-style {
+    font-family: sans-serif;
+    font-size: 16px;
+    padding-left: 30px;
+    padding-right: 10px;
+    width: 25%;
+  }
+  
+  .input-style {
+    width: 60%;
+    height: 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid black;
+  }
+  
+  .radio-group {
+    display: flex;
+    align-items: center;
+  }
+  
+  .radio-label {
+    font-family: Imprima;
+    font-size: 14px;
+    // margin-right: 20px;
+  }
+  
+  .radio-input {
+    margin-right: 5px;
+  }
+  
+  .textarea-style {
+    width: 60%;
+    height: 25px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: Imprima;
+    font-size: 14px;
+    resize: vertical;
+  }
+  
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+  }
+  
+  .input-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+  }
+  
+  .input-row {
+    margin-bottom: 10px;
+  }
+  .form-control-selectors {
+    width:243px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  .form-control {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .radio-group {
+    display: flex;
+    align-items: center;
+  }
+  
+  .radio-label {
+    margin-right: 10px;
+  }
+  /* Add these styles to your component's CSS or SCSS file */
+.success-button {
+    background-color: #156EF3; /* Change this to your desired success color */
+    color: white;
+  }
+  
+  .success-button:hover {
+    background-color: #156EF3; /* Change this to a slightly different color for hover effect */
+  }
+  /* Custom styles for the alert */
+.custom-alert-container {
+  background-color: #ffcc00; /* Background color */
+  color: #333; /* Text color */
+  font-size: 16px; /* Text font size */
+  padding: 10px; /* Padding */
+}
+
+.custom-alert-icon {
+  font-size: 24px; /* Icon size */
+}
+
+.loader {
+  position: absolute;
+  top: -20%;
+  left: 20px;
+  width: 100%;
+  height: 100%;
+  // background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* Ensure it appears on top of other content */
+}
+
+.mat-input{
+  width: 100%;
+  height: 50px;
+}

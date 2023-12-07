@@ -1,0 +1,113 @@
+<div style="min-height: 80vh;">
+
+  <div fxLayout="column" style="padding: 20px;">
+    <div class="box-shadow-div" fxLayout="row" fxLayoutGap="5px" style="padding: 5px; padding-bottom: 5px;">
+      <div fxFlex="100%" class="input-form">
+        <form style="display: flex; flex-direction: column; max-width: 100%;">
+
+          <div fxLayout="column" fxLayoutAlign="space-between">
+
+            <div class="input-row ">
+
+              <div style="display: flex; flex-direction: row; align-items: center; width: 100%;">
+
+                <div [hidden]="addNewGroup" style="width: 35%;">
+                  <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-right: 10px; ">
+                    <mat-label>Group Name</mat-label>
+                    <mat-select matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedGroup"
+                      placeholder="Group Name">
+                      <mat-option (click)="onActionAnable(selectedGroup)" *ngFor="let group of userGroups"
+                        [value]="group">
+                        {{ group}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+
+                <div [hidden]="!addNewGroup" style="width: 35%;">
+
+
+                  <mat-form-field class="mat-input" appearance="outline">
+                    <mat-label>Group Name</mat-label>
+                    <input matInput type="text" placeholder="Group Name" [(ngModel)]="selectedGroup"
+                      [ngModelOptions]="{standalone: true}">
+                  </mat-form-field>
+
+                </div>
+                <div class="input-row ">
+                  <div style="display: flex; flex-direction: row; align-items: center; padding-left: 10px;">
+                    <div style="width: 100%; padding-top: 10px;" >
+                      <button mat-raised-button class="success-button" style="margin-right: 10px; background-color: #156EF3; color: white;"
+                        (click)="addNew()">Add New</button>
+                      <button mat-raised-button class="success-button"
+                        style="background-color: #156EF3; color: white; "
+                        (click)="save()">Save</button>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+        </form>
+
+        <hr style="margin: 5px; border: 0; border-top: 2px solid rgb(212, 206, 206);">
+
+        <div fxLayout="column" style="width: 50%;">
+          <div>
+            <div class="tableSection ">
+
+              <table #dataTable mat-table [dataSource]="userGroupDataSource" class="mat-elevation-z8 demo-table table-cell" 
+                style="border-radius: 15px; overflow: hidden; width: 100%;">
+
+                <ng-container matColumnDef="menuType">
+                  <th mat-header-cell *matHeaderCellDef class="table-header">
+                    Permision </th>
+                  <td mat-cell *matCellDef="let element" class="table-data" style="">{{
+                    element.menuType }}</td>
+                </ng-container>
+                <!-- <ng-container matColumnDef="menu">
+                <th mat-header-cell *matHeaderCellDef class="table-header">
+                  Menu</th>
+                <td mat-cell *matCellDef="let element" class="table-data">{{
+                  element.menu }}</td>
+              </ng-container> -->
+
+
+                <ng-container matColumnDef="select">
+                  <th mat-header-cell *matHeaderCellDef class="table-header" style="width: 200px;">
+                    Select <input type="checkbox" id="epf" name="selectAll"     [(ngModel)]="selectedAll" (change)="selectAll()"></th>
+                  <td mat-cell *matCellDef="let element" class="action-cell">
+                    <input type="checkbox" id="epf" name="select" [(ngModel)]="element.select"
+                      (change)="onRowSelect(element)">
+                  </td>
+
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedUserGroup" style="height: 50px;"></tr>
+                <tr mat-row [ngClass]="{
+                  'inactive-row': !element.activeStatus
+                }" *matRowDef="let element; columns: displayedUserGroup;  let rowIndex = index"
+                    style="height: 10px; cursor: pointer; " (click)="onRowClick(rowIndex)"[ngStyle]="getRowStyle(rowIndex)"  class="hovered-row" >
+                </tr>
+              </table>
+              <div *ngIf="isLoading" class="loader">
+
+                <mat-spinner diameter="70"></mat-spinner>
+              </div>
+              <mat-paginator [length]="length" [pageIndex]="pageIndex" [pageSize]="pageSize"
+                [pageSizeOptions]="[10,20,35,50]" style="border-radius: 15px; overflow: hidden; width: 100%;"
+                (page)="getServerData($event)" aria-label="Select page of periodic elements">
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,58 @@
+.box-shadow-div {
+    background: #edf1f7;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    padding-top: 0;
+    border-radius: 8px;
+}
+
+.mat-input {
+    width: 100%;
+    height: 50px;
+}
+
+.input-row {
+    margin-bottom: 10px;
+    width: 80%;
+}
+.input-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+  }
+
+  .table-header {
+    font-family: 'Imprima';
+    font-weight: 600;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    text-align: center;
+    color: #156EF3;
+}
+
+.table-data {
+    font-family: 'Imprima';
+    font-size: 12px;
+    border: 1px solid #ccc;
+    height: 30px;
+    // text-align: center;
+}
+
+.table-cell {
+    border: 1px solid #ccc;
+}
+
+.action-cell {
+    color: #156EF3;
+    font-family: 'Imprima';
+    border: 1px solid #ccc;
+width: 15%;
+}
+.hovered-row:hover {
+    background-color: #e6f7ff !important; /* Set the hover color as per your preference */
+  }

@@ -1,0 +1,85 @@
+<mat-drawer-container class="app-container" style="background-color: #ffffff; height: min-content;">
+  <!-- Sidebar -->
+  <mat-drawer class="menu-drawer" [opened]="isMenuOpen" (openedChange)="isMenuOpen = $event">
+    <mat-nav-list>
+      <ng-container *ngFor="let menuItem of menuItems">
+        <div [hidden]="menuItem.hidden">
+          <mat-list-item *ngIf="!menuItem.children; else subMenu">
+            {{ menuItem.label }}
+            <button mat-icon-button [matMenuTriggerFor]="childMenu">
+              <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+          </mat-list-item>
+          <ng-template #subMenu>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <mat-icon style=" margin-right: 10px;">{{ menuItem.icon }}</mat-icon>
+                  {{ menuItem.label }}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-list>
+                <ng-container *ngFor="let childItem of menuItem.children">
+                  <div [hidden]="childItem.hidden">
+                    <button mat-menu-item [routerLink]="childItem.link" class="menu-item"
+                      (click)="setHeader(childItem.label )">
+                      {{ childItem.label }}
+                    </button>
+                  </div>
+
+                </ng-container>
+              </mat-list>
+            </mat-expansion-panel>
+          </ng-template>
+        </div>
+        <mat-menu #childMenu="matMenu">
+          <ng-container *ngFor="let childItem of menuItem.children">
+            <button mat-menu-item [routerLink]="childItem.link">
+              {{ childItem.label }}
+            </button>
+          </ng-container>
+        </mat-menu>
+      </ng-container>
+    </mat-nav-list>
+  </mat-drawer>
+
+  <mat-drawer-content style="min-height: 100vh;" >
+    <!-- Header -->
+    <div style="width: 100vw; height: 6vh; display: flex; justify-content: space-between; border-bottom: 1.5px solid black; border-left: 1.5px solid; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); border-left: 1.5px solid whitesmoke; position: fixed;top: 0;
+    left: 0;
+    right: 0; background: white;">
+      <div style="flex: 1; display: flex; justify-content: flex-start; align-items: center; padding-left: 10px;">
+        <mat-icon (click)="toggleMenu()" style="z-index: 1000000000; cursor: pointer; ">{{ isMenuOpen ? 'menu' :
+          'menu'}}</mat-icon>
+      </div>
+      <div
+        style="flex: 1;display: flex; justify-content: center; align-items: center; color: #156EF3; font-weight: 500; font-size: 24px;">
+        {{header}}</div>
+      <div style="flex: 1; display: flex; justify-content: flex-end; align-items: center; padding-right: 15px;">
+        <mat-icon (click)="homeRoute()" matTooltip="Home"
+          style="z-index: 1000000000; padding-right: 10px; cursor: pointer;">home</mat-icon>
+        <mat-icon (click)="changePassword()" matTooltip="Change Password"
+          style="z-index: 1000000000; padding-right: 10px; cursor: pointer;">lock</mat-icon>
+        <mat-icon (click)="logout()" matTooltip="Logout"
+          style="z-index: 1000000000; cursor: pointer;">power_settings_new</mat-icon>
+      </div>
+      <div
+        style="height: 100vh; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; padding-right: 15px; background-color: #ffffff; position: fixed; top: 6vh;">
+        <!-- Icons for Menu Items -->
+        <div *ngFor="let menuItem of menuItems" style="display: flex; align-items: center;  margin-left: 10px;">
+          <div [hidden]="menuItem.hidden">
+            <mat-icon (click)="toggleMenu()" style="z-index: 1000000000; cursor: pointer;">{{ menuItem.icon
+              }}</mat-icon>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div
+      style="overflow-y: auto;padding-left: 40px; position: relative; top: 6vh; width: calc(100vw - 40px); z-index: -1000000000000000000000000;">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

@@ -1,0 +1,112 @@
+.mainContainer {
+    height: 100vh;
+    background: #fafcfb;
+}
+
+.LoginTitle {
+    width: 100%;
+    height: 25%;
+    margin-bottom: 20px;
+}
+
+.btnLogin {
+    background-color: rgb(14, 3, 119);
+    top: -1px;
+    position: relative;
+    border: none;
+    text-decoration-color: white;
+    width: 60%;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white !important;
+}
+
+.input-style {
+    width: 60%;
+    height: 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.loginContainer {
+    text-align: center;
+    background: white;
+    background-size: cover;
+    width: 30%;
+    border: 1px solid rgb(7, 18, 161);
+    margin: auto;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.divider {
+    width: 100%;
+    border-top: 2px solid rgb(243, 238, 238);
+}
+
+.inputField {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid rgb(243, 238, 238);
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.passwordButton {
+    position: relative;
+    bottom: 6px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.btnLogin {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btnLogin:hover {
+    background-color: #0056b3;
+}
+
+.inputWithIcon {
+    position: relative;
+}
+
+.inputWithIcon input {
+    padding-right: 30px; /* To make space for the icon */
+}
+
+.inputWithIcon mat-icon {
+    position: absolute;
+    top: 40%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+/* Logo Container */
+.logoContainer {
+    position: relative;
+    // top: 100px;
+    // margin-bottom: 20px;
+    text-align: center;
+    height: 35%;
+}
+
+.logoContainer img {
+    width: 50%;
+    border-radius: 8px;
+}
+.footer {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color:  #0056b3;
+    text-align: center;
+  }

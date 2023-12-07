@@ -1,0 +1,312 @@
+<div style="min-height: 80vh;">
+
+  <div fxLayout="column" style="padding: 20px;">
+    <div class="box-shadow-div" fxLayout="row" fxLayoutGap="5px" style="padding: 5px; padding-bottom: 5px;">
+      <div fxFlex="50%" class="input-form">
+        <form style="display: flex; flex-direction: column; max-width: 100%;">
+          <div class="column" style="display: flex; flex-direction: column; align-items: start;">
+            <h1 style="font-weight: 500; color: #156EF3;">Loan File</h1>
+          </div>
+          <div fxLayout="column" fxLayoutAlign="space-between">
+
+            <div class="input-row ">
+              <div style="display: flex; flex-direction: row; align-items: center; ">
+                <mat-form-field class="mat-input" appearance="outline" style="width: 80%; padding-top: 5px;">
+                  <mat-label>Loan Type</mat-label>
+                  <mat-select placeholder="Loan Type" [(ngModel)]="loanType" name="type"
+                    [ngModelOptions]="{standalone: true}">
+                    <mat-option *ngFor="let loanType of LoanTypes" [value]="loanType">{{ loanType }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="mat-input" appearance="outline" style="width: 30%;  margin-left: 10px; ">
+                  <mat-label>Loan No</mat-label>
+                  <input matInput type="text" [(ngModel)]="loanNo" placeholder="<< Auto >>" readonly
+                    [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+
+              </div>
+            </div>
+            <div class="input-row ">
+              <div style="display: flex; flex-direction: row; align-items: center;">
+                <mat-form-field class="mat-input" appearance="outline" style="width: 80%;  padding-top: 5px; ">
+                  <mat-label>Applicant</mat-label>
+                  <input type="text" (click)="onKeyUp()" matInput [formControl]="applicantControl"
+                    [matAutocomplete]="auto" placeholder="Applicant">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option (click)="onKeyUp()" *ngFor="let applicant of filteredApplicant | async"
+                      [value]="applicant">{{ applicant
+                      }}</mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+
+                <mat-form-field class="mat-input" appearance="outline" style="width: 30%;  margin-left: 10px;">
+                  <mat-label>Emp ID</mat-label>
+                  <input matInput type="text" readonly [(ngModel)]="empId" [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+
+              </div>
+            </div>
+            <div class="input-row ">
+              <div style="display: flex; flex-direction: row; align-items: center;">
+
+                <mat-form-field class="mat-input" appearance="outline" style="width: 50%; padding-top: 5px;">
+                  <mat-label>Loan Date</mat-label>
+                  <input matInput [matDatepicker]="picker" [(ngModel)]="applyDate" placeholder="Apply Date"
+                    [ngModelOptions]="{standalone: true}">
+                  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class="mat-input" appearance="outline"
+                  style="width: 50%; padding-top: 5px;   margin-left: 10px;">
+                  <mat-label>Salary Month</mat-label>
+                  <mat-select matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedMonth"
+                    placeholder="Salary Month">
+                    <mat-option *ngFor="let month of months" [value]="month.code">
+                      {{ month.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <!-- <mat-form-field class="mat-input" appearance="outline" style="width: 50%;  margin-left: 10px; ">
+                  <mat-label>Loan Amount</mat-label>
+                  <input matInput type="text" [(ngModel)]="loanAmount" placeholder="Loan Amount"
+                    [ngModelOptions]="{standalone: true}">
+                </mat-form-field> -->
+              </div>
+            </div>
+            <div class="input-row ">
+              <div style="display: flex; flex-direction: row; align-items: center;">
+
+
+                <mat-form-field class="mat-input" appearance="outline" style="width: 50%;padding-top: 5px; ">
+                  <mat-label>Loan Amount</mat-label>
+                  <input matInput type="number" [(ngModel)]="loanAmount" placeholder="Loan Amount"
+                    [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+                <mat-form-field class="mat-input" appearance="outline" style="width: 50%;  margin-left: 10px; ">
+                  <mat-label>Salary</mat-label>
+                  <input matInput type="number" [(ngModel)]="considerateSalary" placeholder="Considerate Salary"
+                    [ngModelOptions]="{standalone: true}" readonly>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-row ">
+              <div style="display: flex; flex-direction: row; align-items: center;">
+
+                <mat-form-field class="mat-input" appearance="outline" style="width: 50%;  padding-top: 5px;">
+                  <mat-label>Settlement Period (Months)</mat-label>
+                  <input matInput type="text" [(ngModel)]="settlemntperiod" placeholder="Settlement Period (Months)"
+                    [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+
+                <mat-form-field class="mat-input" appearance="outline" style="width: 50%;  margin-left: 10px; ">
+                  <mat-label>Monthly Instalment (LKR)</mat-label>
+                  <input matInput type="text" [(ngModel)]="monthlyInstalment" placeholder="Monthly Instalment (LKR)"
+                    [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-row ">
+              <div style="display: flex; flex-direction: row; align-items: center;">
+
+                <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  padding-top: 5px;">
+                  <mat-label>Reason For Apply</mat-label>
+                  <input matInput type="text" [(ngModel)]="reason" placeholder="Reason For Apply"
+                    [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-row ">
+              <div style="display: flex; flex-direction: row; align-items: center;">
+                <mat-form-field class="mat-input" appearance="outline" style="width: 80%;  padding-top: 5px; ">
+                  <mat-label>Guarantee 1</mat-label>
+                  <input (click)="onKeyUpGurantee1()" type="text" matInput [formControl]="guaranteeControl1"
+                    [matAutocomplete]="auto1" placeholder="Guarantee 1">
+                  <mat-autocomplete #auto1="matAutocomplete">
+                    <mat-option (click)="onKeyUpGurantee1()" *ngFor="let applicant of filteredGuarantee1 | async"
+                      [value]="applicant">{{ applicant
+                      }}</mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+
+                <mat-form-field class="mat-input" appearance="outline" style="width: 30%;  margin-left: 10px;">
+                  <mat-label>Emp ID</mat-label>
+                  <input matInput readonly type="text" [(ngModel)]="gurantee1" [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+
+              </div>
+            </div>
+            <div class="input-row ">
+              <div style="display: flex; flex-direction: row; align-items: center;">
+                <mat-form-field class="mat-input" appearance="outline" style="width: 80%;  padding-top: 5px; ">
+                  <mat-label>Guarantee 2</mat-label>
+                  <input (click)="onKeyUpGurantee2()" type="text" matInput [formControl]="guaranteeControl2"
+                    [matAutocomplete]="auto2" placeholder="Guarantee 2">
+                  <mat-autocomplete #auto2="matAutocomplete">
+                    <mat-option (click)="onKeyUpGurantee2()" *ngFor="let applicant of filteredGuarantee2 | async"
+                      [value]="applicant">{{ applicant
+                      }}</mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+
+                <mat-form-field class="mat-input" appearance="outline" style="width: 30%;  margin-left: 10px;">
+                  <mat-label>Emp ID</mat-label>
+                  <input matInput readonly type="text" [(ngModel)]="gurantee2" [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+
+              </div>
+            </div>
+            <div class="input-row ">
+              <div style="display: flex; flex-direction: row; align-items: center;">
+                <div style="width: 100%; padding-top: 10px;" dir="rtl">
+                  <button mat-raised-button class="success-button" style="background-color: #d60035; color: white;"
+                    (click)="cancelLoan()">Canel</button>
+                  <button mat-raised-button class="success-button"
+                    style="background-color: #156EF3; color: white; margin-right: 10px;"
+                    (click)="newLoan()">Save</button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div fxFlex="50%" class="input-form">
+
+
+        <form style="display: flex; flex-direction: column; max-width: 100%;">
+          <div class="column" style="display: flex; flex-direction: column; align-items: start;">
+            <h1 style="font-weight: 500; color: #156EF3;">Loan Settlement</h1>
+          </div>
+          <div fxLayout="column" fxLayoutAlign="space-between">
+            <div class="input-row ">
+              <div style="display: flex; flex-direction: row; align-items: center;">
+                <mat-form-field class="mat-input" appearance="outline"
+                  style="width: 50%;   padding-top: 10px; padding-right: 10px;">
+                  <mat-label>Loan Settle Amount</mat-label>
+                  <input matInput type="text" placeholder="Loan Settle Amount" [(ngModel)]="settleAmount"
+                    [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+                <mat-form-field class="mat-input" appearance="outline" style="width: 50%;   padding-top: 10px;">
+                  <mat-label>Total OutSanding</mat-label>
+                  <input matInput type="text" placeholder="Total OutSanding" [(ngModel)]="outStanding"
+                    [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div fxLayout="column" fxLayoutAlign="space-between">
+            <div class="input-row ">
+              <div style="display: flex; flex-direction: row; align-items: center;">
+                <mat-form-field class="mat-input" appearance="outline"
+                  style="width:50%; padding-top: 5px; padding-right: 10px;">
+                  <mat-label>Loan Settle Date</mat-label>
+                  <input matInput [matDatepicker]="picker1" [(ngModel)]="loanSettleDate" placeholder="Loan Settle Date"
+                    [ngModelOptions]="{standalone: true}">
+                  <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class="mat-input" appearance="outline" style="width: 50%;padding-top: 5px;  ">
+                  <mat-label>Special Note</mat-label>
+                  <textarea matInput [(ngModel)]="specialNote" style="width: 100%; height: 25px; padding: 5px;"
+                    [ngModelOptions]="{standalone: true}" placeholder="Special Note"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <!-- <div fxLayout="column" fxLayoutAlign="space-between">
+          <div class="input-row ">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+             
+            </div>
+          </div>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="space-between">
+          <div class="input-row ">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+              <mat-form-field class="mat-input" appearance="outline" style="width: 50%;   padding-top: 10px;">
+                <mat-label>Voucher Number</mat-label>
+                <input matInput type="text" placeholder="Voucher Number" [(ngModel)]="voucherNumber"
+                  [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
+            </div>
+          </div>
+        </div> -->
+          <!-- <div fxLayout="column" fxLayoutAlign="space-between">
+          <div class="input-row ">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+
+              <mat-form-field class="mat-input" appearance="outline" style="width: 72%;padding-top: 5px;  ">
+                <mat-label>Special Note</mat-label>
+                <textarea matInput [(ngModel)]="specialNote" style="width: 100%; height: 33px; padding: 5px;"
+                  [ngModelOptions]="{standalone: true}" placeholder="Special Note"></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+        </div> -->
+          <div class="input-row ">
+            <div style="display: flex; flex-direction: row; align-items: center;">
+              <div style="width: 100%; padding-top: 10px;" dir="rtl">
+                <button mat-raised-button class="success-button" style="background-color: #d60035; color: white;"
+                  (click)="closeLoan()">Close</button>
+                <button mat-raised-button class="success-button"
+                  style="background-color: #156EF3; color: white; margin-right: 10px;"
+                  (click)="settleLoan()">Settle</button>
+
+              </div>
+            </div>
+            <div class="column">
+              <div fxLayout="column" style="padding-top: 15px; width: 100%;">
+                <table mat-table [dataSource]="settleLoanoadDataSource" class="mat-elevation-z8 demo-table table-cell"
+                  style="border-radius: 15px; overflow: hidden; width: 100%;">
+
+
+                  <ng-container matColumnDef="deductMonth">
+                    <th mat-header-cell *matHeaderCellDef class="table-header">
+                      Deduct Month</th>
+                    <td mat-cell *matCellDef="let element" class="table-data">{{
+                      element.deductMonth }}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="remark">
+                    <th mat-header-cell *matHeaderCellDef class="table-header">
+                      Remark</th>
+                    <td mat-cell *matCellDef="let element" class="table-data">{{
+                      element.remark }}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="deductAmount">
+                    <th mat-header-cell *matHeaderCellDef class="table-header">
+                      Deduct Amount</th>
+                    <td mat-cell *matCellDef="let element" class="table-data" style="text-align: right;">{{
+                      element.deductAmount }}</td>
+                  </ng-container>
+
+
+                  <tr mat-header-row *matHeaderRowDef="displaySettleLoan" style="height: 50px;"></tr>
+                  <tr mat-row [ngClass]="{
+                    'inactive-row': !element.activeStatus
+                  }" *matRowDef="let element; columns: displaySettleLoan;  let rowIndex = index"
+                    style="height: 10px; cursor: pointer; " (click)="onRowClick(rowIndex)"[ngStyle]="getRowStyle(rowIndex)"  class="hovered-row">
+                  </tr>
+                </table>
+                <!-- <div *ngIf="isLoading" class="loader">
+
+                  <mat-spinner diameter="70"></mat-spinner>
+                </div> -->
+                <!-- <mat-paginator [length]="length" [pageIndex]="pageIndex" [pageSize]="pageSize"
+                  [pageSizeOptions]="[10,20,50,50]" style="border-radius: 15px; overflow: hidden; width: 100%;"
+                  (page)="getServerData($event)" aria-label="Select page of periodic elements">
+                </mat-paginator> -->
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  
+</div>

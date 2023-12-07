@@ -1,0 +1,17 @@
+.slipUser:hover{
+    transform: scale(0.8); 
+    transition: transform 0.8s;
+}
+.slipUser{
+    scale: 1.2;
+    cursor: pointer;
+}
+.title{
+    // scale: 1.2;
+    cursor: pointer;
+}
+.title:hover{
+    transform: scale(0.8); 
+    transition: transform 0.8s;
+
+}

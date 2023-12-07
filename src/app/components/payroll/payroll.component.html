@@ -1,0 +1,163 @@
+<div style="min-height: 80vh;">
+
+  <div fxLayout="column" class="box-shadow-div" style="padding-top: 10px;">
+
+    <div fxLayout="column" style=" ">
+      <div fxFlex="100%" class="input-form">
+        <div fxLayout="row" fxLayoutAlign="space-between" style="padding-top: 10px; padding-left: 10px;">
+          <div fxFlex class="column">
+            <div class="input-row ">
+              <div style="display: flex; flex-direction: row; align-items: center; width: 100%;">
+
+                <mat-form-field class="mat-input" appearance="outline"
+                  style="width: 30%; padding-right: 10px; padding-top: 5px;">
+                  <mat-label>Salary Month</mat-label>
+                  <mat-select matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedMonth"
+                    placeholder="Salary Month">
+                    <mat-option (click)="onActionAnable(selectedMonth)" *ngFor="let month of months"
+                      [value]="month.code">
+                      {{ month.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <div style="width: 71%; padding-top: 10px;">
+
+                  <button mat-raised-button class="success-button"
+                    style="background-color: #156EF3; color: white; margin-right: 10px;" (click)="runWizard()">Run
+                    Wizard</button>
+                  <button mat-raised-button class="success-button"
+                    style="background-color: #156EF3; color: white; margin-right: 10px;"
+                    (click)="finalizePayroll()">Finalize Payroll</button>
+                  
+                  <button mat-raised-button class="success-button"
+                    style="background-color: #156EF3; color: white; margin-right: 10px;" (click)="excellDownload()"
+                    matTooltip="Download Excel">
+                    <!-- <mat-icon>file_download</mat-icon> -->
+                    Download Excel
+                  </button>
+                  <button mat-raised-button class="success-button"
+                  style="background-color: #d60035; color: white; margin-right: 10px;"
+                  (click)="removeEntries()">Remove All Entries</button>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+        <div fxLayout="column">
+          <div>
+            <div class="tableSection " style="padding: 10px; " [hidden]="!probar">
+              <!-- <div fxLaout="row" fxLayoutAlign="end" class="input-row">
+                <input placeholder="Search" type="search" class="form-control input-style" id="certName" name="certName"
+                  [(ngModel)]="searchEmp" (keyup)="onSearchKeyup()">
+
+              </div> -->
+              <table mat-table [dataSource]="serviceAllowancesDataSource" class="mat-elevation-z8 demo-table table-cell"
+                style="border-radius: 15px; overflow: hidden; width: 100%;">
+                <ng-container matColumnDef="no">
+                  <th mat-header-cell *matHeaderCellDef class="table-header">
+                    Emp ID</th>
+                  <td mat-cell *matCellDef="let element" class="table-data">{{
+                    element.no
+                    }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="empName">
+                  <th mat-header-cell *matHeaderCellDef class="table-header">
+                    Employee Name </th>
+                  <td mat-cell *matCellDef="let element" class="table-data">{{
+                    element.empName }}</td>
+                </ng-container>
+                <ng-container matColumnDef="epf">
+                  <th mat-header-cell *matHeaderCellDef class="table-header">
+                    EPF#</th>
+                  <td mat-cell *matCellDef="let element" class="table-data">{{
+                    element.epf }}</td>
+                </ng-container>
+                <ng-container matColumnDef="department">
+                  <th mat-header-cell *matHeaderCellDef class="table-header">
+                    Department</th>
+                  <td mat-cell *matCellDef="let element" class="table-data">{{
+                    element.department
+                    }}</td>
+                </ng-container>
+                <ng-container matColumnDef="designation">
+                  <th mat-header-cell *matHeaderCellDef class="table-header">
+                    Designation</th>
+                  <td mat-cell *matCellDef="let element" class="table-data">{{
+                    element.designation
+                    }}</td>
+                </ng-container>
+                <ng-container matColumnDef="grossSalary">
+                  <th mat-header-cell *matHeaderCellDef class="table-header">
+                    Gross Salary</th>
+                  <td mat-cell *matCellDef="let element" class="table-data">{{
+                    element.grossSalary
+                    }}</td>
+                </ng-container>
+                <ng-container matColumnDef="netSalary">
+                  <th mat-header-cell *matHeaderCellDef class="table-header">
+                    Net Salary</th>
+                  <td mat-cell *matCellDef="let element" class="table-data">{{
+                    element.netSalary
+                    }}</td>
+                </ng-container>
+                <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef class="table-header">
+                    Action</th>
+                  <td mat-cell *matCellDef="let element" class="action-cell">
+                    <mat-icon (click)="updateData(element)" style="cursor: pointer;">edit</mat-icon>
+                    <mat-icon (click)="!setAction&& showDeleteConfirmation(element)"
+                      style="cursor: pointer;">delete</mat-icon>
+
+                  </td>
+
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedServiceAllowances" style="height: 50px;"></tr>
+                <tr mat-row [ngClass]="{
+                    'inactive-row': !element.activeStatus
+                  }" *matRowDef="let element; columns: displayedServiceAllowances;  let rowIndex = index"
+                    style="height: 10px; cursor: pointer; " (click)="onRowClick(rowIndex)"[ngStyle]="getRowStyle(rowIndex)"  class="hovered-row"
+                 ></tr>
+              </table>
+              <div [hidden]="msg">
+                <div style="width: 100%; display: flex; justify-content: center; align-items: center;padding-top: 5px;">
+                  <h3>No Payroll Data for selected month</h3>
+                </div>
+
+              </div>
+
+              <!-- <div *ngIf="isLoading" class="loader">
+
+                <mat-spinner diameter="70"></mat-spinner>
+              </div> -->
+              <mat-paginator [length]="length" [pageIndex]="pageIndex" [pageSize]="pageSize"
+                [pageSizeOptions]="[10,20,35,50]" style="border-radius: 15px; overflow: hidden; width: 100%;"
+                (page)="getServerData($event)" aria-label="Select page of periodic elements">
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+        <div [hidden]="probar">
+          <mat-card class="example-card">
+            <mat-card-content>
+              <h2 class="example-h2">Proccesing</h2>
+
+              <section class="example-section">
+                <mat-progress-bar class="example-margin" [color]="color" [mode]="mode" [value]="value"
+                  [bufferValue]="bufferValue">
+                </mat-progress-bar>
+              </section>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

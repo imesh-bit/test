@@ -1,0 +1,48 @@
+<section class="mainContainer" fxLayout="column" fxLayoutAlign="center center">
+  <div class="logoContainer">
+    <!-- Add your logo image here -->
+    <img src="../../../assets/Control Union.png" alt="Logo">
+  </div>
+
+  <div class="loginContainer" fxLayout="column">
+    <div class="LoginTitle">
+      <p style="font-size: 30px;color: #797e83; font-weight: 600; font-family: Imprima;">Select your Location</p>
+      <div class="divider"></div>
+    </div>
+
+    <div style="font-size: 12px;">
+      <div fxLayout="column" fxLayoutGap="10px" style="width: 100%;">
+        <mat-form-field class="mat-input" appearance="outline"
+          style=" padding-top: 5px; width: 100%; padding-right: 10px; ">
+          <mat-label>Location</mat-label>
+          <mat-select matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedGroup"
+            placeholder="Location">
+
+            <mat-form-field class="mat-input" appearance="outline" style="width: 100%;  padding-top: 5px;">
+
+              <input matInput type="text" [(ngModel)]="userName" [ngModelOptions]="{standalone: true}"
+               >
+            </mat-form-field>
+            <mat-option *ngFor="let group of userGroups" [value]="group">
+
+              {{ group}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- <div class="inputWithIcon">
+          <input [(ngModel)]="password" [type]="showPassword ? 'text' : 'password'" placeholder="Password" class="inputField">
+          <mat-icon (click)="togglePasswordVisibility()">
+            {{ showPassword ? 'visibility' : 'visibility_off' }}
+          </mat-icon>
+        </div> -->
+        <div fxLayout="row" fxLayoutAlign="center">
+          <button mat-button color="primary" class="btnLogin" (click)="onLogin()">SIGN IN</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    &copy; 2023 Control Union. All rights reserved.
+  </div>
+</section>

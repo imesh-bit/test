@@ -1,0 +1,146 @@
+<div style="min-height: 94vh;">
+  <!-- <div fxLayout="row" fxLayoutAlign="space-between" style="padding-top: 10px; padding-left: 10px;">
+    <div fxFlex class="column">
+      <h1 style="color: #156EF3;font-weight: 500;">Bank</h1>
+    </div>
+  </div> -->
+
+
+  <div fxLayout="column" class="box-shadow-div" style="padding-top: 10px;">
+    <!-- <div fxLayout="row" style="padding-left: 10px;"> 
+    <mat-icon style="font-size: 32px; cursor: pointer;" (click)="save()" matTooltip="Save">save</mat-icon>
+  </div> -->
+
+    <!-- <hr style="margin: 5px; border: 0; border-top: 1px solid black;"> -->
+    <div fxLayout="column" style=" padding: 10px;padding-top: 20px; background:white;">
+      <!-- <div class="input-row">
+        <mat-form-field class="mat-input" appearance="outline"
+          style="width: 25%; padding-top: 5px; padding-left: 10px;">
+          <mat-label>Bank Name</mat-label>
+          <input matInput [(ngModel)]="bankname" placeholder="Bank Name" [ngModelOptions]="{standalone: true}">
+
+        </mat-form-field>
+      </div> -->
+      <div class="input-row">
+        <div style="display: flex; flex-direction: row; align-items: center; width: 100%;">
+          <mat-form-field class="mat-input" appearance="outline"
+            style="width: 25%; padding-top: 5px; padding-left: 10px;">
+            <mat-label>Bank Name</mat-label>
+            <input (keyup)="onSearchKeyup($event)" matInput [(ngModel)]="bankname" placeholder="Bank Name"
+              [ngModelOptions]="{standalone: true}">
+
+          </mat-form-field>
+
+          <mat-form-field class="mat-input" appearance="outline"
+            style="width: 25%; padding-top: 5px; padding-left: 10px;">
+            <mat-label>Bank Code</mat-label>
+            <input matInput [(ngModel)]="bankcode" placeholder="Bank Code" [ngModelOptions]="{standalone: true}">
+
+          </mat-form-field>
+          <!-- <input type="text" class="form-control " id="certName" name="certName" style="width: 60%; "
+            [(ngModel)]="bankcode" placeholder="Bank Code " matTooltip="Bank Code"> -->
+        </div>
+
+      </div>
+      <div class="input-row">
+        <div style="display: flex; flex-direction: row; align-items: center; width: 100%;">
+          <mat-form-field class="mat-input" appearance="outline"
+            style="width: 25%; padding-top: 5px; padding-left: 10px;">
+            <mat-label>Branch Name</mat-label>
+            <input matInput [(ngModel)]="branchname" placeholder="Branch Name" [ngModelOptions]="{standalone: true}">
+
+          </mat-form-field>
+
+          <mat-form-field class="mat-input" appearance="outline"
+            style="width: 25%; padding-top: 5px; padding-left: 10px;">
+            <mat-label>Branch Code</mat-label>
+            <input matInput [(ngModel)]="branchcode" placeholder="Branch Code" [ngModelOptions]="{standalone: true}">
+
+          </mat-form-field>
+          <!-- <input type="text" class="form-control " id="certName" name="certName" style="width: 60%; "
+            [(ngModel)]="bankcode" placeholder="Bank Code " matTooltip="Bank Code"> -->
+        </div>
+
+      </div>
+      <div class="input-row" style="display: flex; justify-content: flex-end; width:52.5%;">
+
+        <button mat-raised-button class="success-button"
+          style="background-color: #156EF3;margin-right: 10px; color: white;" (click)="save()">
+          Save
+        </button>
+        <button mat-raised-button class="success-button"
+          style="background-color: #d60035; margin-right: 10px; color: white;" (click)="cancel()">
+          Cancel
+        </button>
+      </div>
+
+
+
+      <hr style="margin: 5px; border: 0; border-top: 1px solid black;">
+
+      <div fxLayout="row">
+        <div class="column" style="padding: 10px; width: 51%;">
+          <table mat-table [dataSource]="bankDataSource" class="mat-elevation-z8 demo-table table-cell"
+            style="border-radius: 15px; overflow: hidden; width: 100%;">
+
+
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef class="table-header">
+                Bank Name</th>
+              <td mat-cell *matCellDef="let element" class="table-data">{{
+                element.name }}</td>
+            </ng-container>
+            <ng-container matColumnDef="bankCode">
+              <th mat-header-cell *matHeaderCellDef class="table-header">
+                Bank Code</th>
+              <td mat-cell *matCellDef="let element" class="table-data">{{
+                element.bankCode }}</td>
+            </ng-container>
+            <ng-container matColumnDef="branchName">
+              <th mat-header-cell *matHeaderCellDef class="table-header">
+                Branch Name</th>
+              <td mat-cell *matCellDef="let element" class="table-data">{{
+                element.branchName }}</td>
+            </ng-container>
+            <ng-container matColumnDef="branchCode">
+              <th mat-header-cell *matHeaderCellDef class="table-header">
+                Branch Code</th>
+              <td mat-cell *matCellDef="let element" class="table-data">{{
+                element.branchCode }}</td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef class="table-header" style="width: 15%;">
+                Action
+              </th>
+              <td mat-cell *matCellDef="let element" class="action-cell" style="text-align: center;">
+                <mat-icon (click)="updateData(element)" style="cursor: pointer;">edit</mat-icon>
+                <mat-icon (click)="updateData(element)" style="cursor: pointer;">delete</mat-icon>
+              </td>
+            </ng-container>
+
+            <div *ngIf="isLoading" class="loader">
+
+              <mat-spinner diameter="70"></mat-spinner>
+            </div>
+            <tr mat-header-row *matHeaderRowDef="displayBank" style="height: 50px;"></tr>
+            <tr mat-row [ngClass]="{
+              'inactive-row': !element.activeStatus
+            }" *matRowDef="let element; columns: displayBank;  let rowIndex = index"
+              style="height: 10px; cursor: pointer; " (click)="onRowClick(rowIndex)" [ngStyle]="getRowStyle(rowIndex)"
+              class="hovered-row" style="height: 10px; cursor: pointer; " (click)="onRowClick(rowIndex)"
+              [ngStyle]="getRowStyle(rowIndex)" class="hovered-row"></tr>
+          </table>
+          <div *ngIf="isLoading" class="loader">
+
+            <mat-spinner diameter="70"></mat-spinner>
+          </div>
+          <mat-paginator [length]="length" [pageIndex]="pageIndex" [pageSize]="pageSize"
+            [pageSizeOptions]="[10,20,35,50]" style="border-radius: 15px; overflow: hidden; width: 100%;"
+            (page)="getServerData($event)" aria-label="Select page of periodic elements">
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

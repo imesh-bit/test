@@ -1,0 +1,117 @@
+<div style="height: 100vh;">
+  <div fxLayout="row" fxLayoutAlign="space-between" style="padding-top: 10px; padding-left: 10px;">
+    <div fxFlex class="column">
+    </div>
+
+    <div>
+      <div class="form-group" (click)="employeeRegister()"
+        style="display: flex; justify-content: flex-end; ;padding-right: 50px; font-size: 32px;">
+        <mat-icon class="custom-icon" (click)="employeeRegister()" style=" " matTooltip="New Employee"
+          focus>person_add</mat-icon>
+        <h4 (click)="employeeRegister()" style="cursor: pointer; font-weight: 500;color: #156EF3;margin: 0;">New
+          Employee</h4>
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Employee Table -->
+  <div fxLayout="column">
+    <div>
+      <div class="tableSection " style="padding: 10px; padding-top: 0;">
+        <div fxLaout="row" fxLayoutAlign="end" class="input-row">
+          <!-- <input placeholder="Search" type="search" class="form-control input-style" id="certName" name="certName"
+            [(ngModel)]="searchEmp" (keyup)="onSearchKeyup($event)"> -->
+          <mat-form-field class="mat-input" appearance="outline" style="width: 30%;    padding-right: 10px;">
+            <mat-label>Search</mat-label>
+            <input matInput type="search" placeholder="Search" [(ngModel)]="searchEmp"
+              [ngModelOptions]="{standalone: true}" (keyup)="onSearchKeyup($event)">
+          </mat-form-field>
+        </div>
+        <table mat-table [dataSource]="employeeDataSource" class="mat-elevation-z8 demo-table table-cell"
+          style="border-radius: 15px; overflow: hidden; width: 100%;position: relative;top: -10px;">
+          <ng-container matColumnDef="systemId">
+            <th mat-header-cell *matHeaderCellDef class="table-header">
+              Emp Id</th>
+            <td mat-cell *matCellDef="let element" class="table-data">{{
+              element.systemId
+              }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="employeeName">
+            <th mat-header-cell *matHeaderCellDef class="table-header">
+              Employee Name</th>
+            <td mat-cell *matCellDef="let element" class="table-data">{{
+              element.employeeName }}</td>
+          </ng-container>
+          <ng-container matColumnDef="epf">
+            <th mat-header-cell *matHeaderCellDef class="table-header">
+              EPF</th>
+            <td mat-cell *matCellDef="let element" class="table-data">{{
+              element.epf }}</td>
+          </ng-container>
+          <ng-container matColumnDef="department">
+            <th mat-header-cell *matHeaderCellDef class="table-header">
+              Department</th>
+            <td mat-cell *matCellDef="let element" class="table-data">{{
+              element.department
+              }}</td>
+          </ng-container>
+          <ng-container matColumnDef="designation">
+            <th mat-header-cell *matHeaderCellDef class="table-header">
+              Designation</th>
+            <td mat-cell *matCellDef="let element" class="table-data">{{
+              element.designation
+              }}</td>
+          </ng-container><ng-container matColumnDef="appoinmentDate">
+            <th mat-header-cell *matHeaderCellDef class="table-header">
+              Appoinment Date</th>
+            <td mat-cell *matCellDef="let element" class="table-data">{{
+              element.appoinmentDate
+              }}</td>
+          </ng-container><ng-container matColumnDef="dateOfBirth">
+            <th mat-header-cell *matHeaderCellDef class="table-header">
+              Date Of Birth</th>
+            <td mat-cell *matCellDef="let element" class="table-data">{{
+              element.dateOfBirth
+              }}</td>
+          </ng-container><ng-container matColumnDef="gender">
+            <th mat-header-cell *matHeaderCellDef class="table-header">
+              Gender</th>
+            <td mat-cell *matCellDef="let element" class="table-data">{{
+              element.gender
+              }}</td>
+          </ng-container>
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef class="table-header">
+              Action</th>
+            <td mat-cell *matCellDef="let element" class="action-cell">
+              <mat-icon (click)="isActive(element) && updateData(element)" style="cursor: pointer;">edit</mat-icon>
+
+            </td>
+
+          </ng-container>
+
+
+          <tr mat-header-row *matHeaderRowDef="displayedEmployee" style="height: 50px;"></tr>
+          <tr mat-row [ngClass]="{
+              'inactive-row': !element.activeStatus
+            }" *matRowDef="let element; columns: displayedEmployee;  let rowIndex = index"
+            style="height: 10px; cursor: pointer; " (click)="onRowClick(rowIndex)" [ngStyle]="getRowStyle(rowIndex)"
+            class="hovered-row" [ngStyle]="getRowStyle(rowIndex)" class="hovered-row" class="hovered-row"></tr>
+        </table>
+        <div *ngIf="isLoading" class="loader">
+
+          <mat-spinner diameter="70"></mat-spinner>
+        </div>
+        <mat-paginator [length]="length" [pageIndex]="pageIndex" [pageSize]="pageSize" [pageSizeOptions]="[10,20,35,50]"
+          style="border-radius: 15px; overflow: hidden; width: 100%;" (page)="getServerData($event)"
+          aria-label="Select page of periodic elements">
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+
+</div>

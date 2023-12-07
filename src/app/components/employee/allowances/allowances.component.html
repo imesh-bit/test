@@ -1,0 +1,138 @@
+
+<div fxLayout="column" style="padding: 10px;">
+  <div class="box-shadow-div" fxLayout="row" fxLayoutGap="5px" style="padding: 5px; padding-bottom: 5px;">
+     <div fxFlex="50%" class="input-form">
+      <form style="display: flex; flex-direction: column; max-width: 90%;">
+        <div class="column" style="display: flex; flex-direction: column; align-items: start;">
+          <h1 style="font-weight: 500; color: #156EF3;">Allowance</h1>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="space-between">
+          <div class="input-row">
+            <!-- <div class="input-row">
+              <div style="display: flex; flex-direction: row; align-items: center; ">
+              </div>
+            </div> -->
+            <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;  ">
+              <mat-label>Allowance 1</mat-label>
+              <input matInput type="text" [(ngModel)]="allowance1" [placeholder]="allowance1"
+                [disabled]="update_status1" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+            <mat-checkbox matInput [(ngModel)]="allow1_status" color="primary" [ngModelOptions]="{standalone: true}"
+              [disabled]="update_status1" style="width: 10%;  ">Fix</mat-checkbox>
+          </div>
+          <div class="input-row">
+            <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;  ">
+              <mat-label>Allowance 2</mat-label>
+              <input matInput type="text" [(ngModel)]="allowance2" [placeholder]="allowance2"
+                [disabled]="update_status2" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+            <mat-checkbox matInput [(ngModel)]="allow2_status" color="primary" [ngModelOptions]="{standalone: true}"
+              [disabled]="update_status2" style="width: 10%; ">Fix</mat-checkbox>
+          </div>
+          <div class="input-row">
+            <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;  ">
+              <mat-label>Allowance 3</mat-label>
+              <input matInput type="text" [(ngModel)]="allowance3" [placeholder]="allowance3"
+                [disabled]="update_status3" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+            <mat-checkbox matInput [(ngModel)]="allow3_status" color="primary" [ngModelOptions]="{standalone: true}"
+              [disabled]="update_status3" style="width: 10%; ">Fix</mat-checkbox>
+          </div>
+          <div class="input-row">
+            <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;  ">
+              <mat-label>Allowance 4</mat-label>
+              <input matInput type="text" [(ngModel)]="allowance4" [placeholder]="allowance4"[disabled]="update_status4"
+                [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+            <mat-checkbox matInput [(ngModel)]="allow4_status" color="primary" [ngModelOptions]="{standalone: true}"[disabled]="update_status4"
+              style="width: 10%; ">Fix</mat-checkbox>
+          </div>
+          <div class="input-row">
+            <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;  ">
+              <mat-label>Allowance 5</mat-label>
+              <input matInput type="text" [(ngModel)]="allowance5" [placeholder]="allowance5"[disabled]="update_status5"
+                [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+            <mat-checkbox matInput [(ngModel)]="allow5_status" color="primary" [ngModelOptions]="{standalone: true}"[disabled]="update_status5"
+              style="width: 10%; ">Fix</mat-checkbox>
+          </div>
+        </div>
+        <div class="input-row" style="display: flex; justify-content: flex-end;">
+          
+          <button mat-raised-button class="success-button" style="margin-right: 10px; background-color: #156EF3;color: white;"
+            (click)="save()">
+            Save
+          </button>
+          <button mat-raised-button class="success-button"
+            style="background-color: #d60035; color: white;" (click)="cancel()">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+    <div fxFlex="50%" class="input-form">
+      <form style="display: flex; flex-direction: column; max-width: 90%;">
+        <div class="column" style="display: flex; flex-direction: column; align-items: start;">
+          <h1 style="font-weight: 500; color: #156EF3;">Deduction</h1>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="space-between">
+          <div class="input-row">
+            <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;  ">
+              <mat-label>Deduction 1</mat-label>
+              <input matInput type="text" [(ngModel)]="deduct1" [placeholder]="deduct1"
+                [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+            <!-- <input type="text" class="form-control " id="certName" name="certName" style="width: 110%; "
+              [(ngModel)]="deduct1" placeholder="Deduction 1" matTooltip="Deduction 1"> -->
+          </div>
+          <div class="input-row">
+            <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;  ">
+              <mat-label>Deduction 2</mat-label>
+              <input matInput type="text" [(ngModel)]="deduct2" [placeholder]="deduct2"
+                [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+
+          </div>
+          <div class="input-row">
+            <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;  ">
+              <mat-label>Deduction 3</mat-label>
+              <input matInput type="text" [(ngModel)]="deduct3" [placeholder]="deduct3"
+                [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+
+          </div>
+          <div class="input-row">
+            <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;  ">
+              <mat-label>Deduction 4</mat-label>
+              <input matInput type="text" [(ngModel)]="deduct4" [placeholder]="deduct4"
+                [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+
+          </div>
+          <div class="input-row">
+            <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;  ">
+              <mat-label>Deduction 5</mat-label>
+              <input matInput type="text" [(ngModel)]="deduct5" [placeholder]="deduct5"
+                [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+
+          </div>
+        </div>
+        <div class="input-row" style="display: flex; justify-content: flex-end;">
+          
+          <button mat-raised-button class="success-button" style=" margin-right: 10px;background-color: #156EF3;color: white;"
+            (click)="saveDeduction()">
+            Save
+          </button>
+          <button mat-raised-button class="success-button"
+            style="background-color: #d60035;color: white;" (click)="cancelDeduction()">
+            Cancel
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+
+</div>

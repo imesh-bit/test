@@ -1,0 +1,52 @@
+<div style="min-height: 80vh;">
+
+  <div fxLayout="column" class="box-shadow-div" style="padding-top: 10px;">
+
+    <div fxLayout="column" >
+      <div fxFlex="100%" class="input-form">
+        <div fxLayout="row" fxLayoutAlign="space-between" style="padding-top: 10px; padding-left: 10px;">
+          <div fxFlex class="column">
+            <div class="input-row ">
+              <div style="display: flex; flex-direction: row; align-items: center; width: 100%;">
+
+                <mat-form-field class="mat-input" appearance="outline"
+                  style="width: 30%; ">
+                  <mat-label>Salary Month</mat-label>
+                  <mat-select matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedMonth"
+                    placeholder="Salary Month">
+                    <mat-option (click)="onActionAnable(selectedMonth)" *ngFor="let month of months"
+                      [value]="month.code">
+                      {{ month.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <!-- <div style="width: 71%; padding-top: 10px;">
+
+                  <button mat-raised-button class="success-button"
+                    style="background-color: #156EF3; color: white; margin-right: 10px;" (click)="runWizard()">Run
+                    Wizard</button>
+                  <button mat-raised-button class="success-button"
+                    style="background-color: #156EF3; color: white; margin-right: 10px;">Finalize Payroll</button>
+                  <button mat-raised-button class="success-button"
+                    style="background-color: #d60035; color: white; margin-right: 10px;">Remove All Entries</button>
+
+                </div> -->
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+        <div fxFlex="100%" class="input-form">
+
+          <div style="width: 100%;margin-top: 10px;">
+            <iframe *ngIf="pdfSrc" [src]="pdfSrc" width="100%" height="500"></iframe>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

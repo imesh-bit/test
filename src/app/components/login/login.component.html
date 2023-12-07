@@ -1,0 +1,35 @@
+<section class="mainContainer" fxLayout="column" fxLayoutAlign="center center">
+  <div class="logoContainer">
+    <!-- Add your logo image here -->
+    <img src="../../../assets/Control Union.png" alt="Logo">
+  </div>
+
+  <div class="loginContainer" fxLayout="column" fxLayoutAlign="center center">
+    <div class="LoginTitle">
+      <p style="font-size: 30px;color: #797e83; font-weight: 600; font-family: Imprima;">Login</p>
+      <div class="divider"></div>
+    </div>
+
+    <div style="font-size: 12px;">
+      <div fxLayout="column" fxLayoutGap="10px">
+        <div class="inputWithIcon">
+          <input [(ngModel)]="username" placeholder="Username" class="inputField">
+          <mat-icon>account_circle</mat-icon>
+        </div>
+        <div class="inputWithIcon">
+          <input [(ngModel)]="password" [type]="showPassword ? 'text' : 'password'" placeholder="Password" class="inputField">
+          <mat-icon (click)="togglePasswordVisibility()">
+            {{ showPassword ? 'visibility' : 'visibility_off' }}
+          </mat-icon>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center">
+          <button mat-button color="primary" class="btnLogin" (click)="onLogin()">SIGN IN</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    &copy; 2023 Control Union. All rights reserved.
+  </div>
+</section>

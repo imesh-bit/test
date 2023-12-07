@@ -1,0 +1,239 @@
+<div style="min-height: 80vh;">
+
+  <div fxLayout="column" style="padding: 20px;">
+    <div class="box-shadow-div" fxLayout="row" fxLayoutGap="5px" style="padding: 5px; padding-bottom: 5px;">
+      <div fxFlex="100%" class="input-form">
+        <form style="display: flex; flex-direction: column; max-width: 100%;">
+
+          <div fxLayout="column" fxLayoutAlign="space-between">
+            <div class="input-row" style="width: 45%;">
+              <div style="display: flex; flex-direction: row; align-items: center;">
+                <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;">
+                  <mat-label>Employee</mat-label>
+                  <input type="text" matInput [formControl]="employeeControl" [matAutocomplete]="auto"
+                    placeholder="Employee" (keyup)="onKeyUp()">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option (click)="onKeyUp()" *ngFor="let employee of filteredEmployees | async"
+                      [value]="employee">{{ employee }}</mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+
+                <mat-form-field class="mat-input" appearance="outline"
+                  style="width: 45%;  padding-top: 5px; margin-left: 10px;">
+                  <mat-label>Emp ID</mat-label>
+                  <input matInput type="text" [(ngModel)]="empId" [ngModelOptions]="{standalone: true}"
+                    placeholder="Emp ID">
+                </mat-form-field>
+
+              </div>
+            </div>
+            <div class="input-row " style="width: 45%;">
+
+              <mat-form-field class="mat-input" appearance="outline"
+                style=" padding-top: 5px; width: 100%; padding-right: 10px; ">
+                <mat-label>Department</mat-label>
+                <input matInput type="text" [(ngModel)]="department" [ngModelOptions]="{standalone: true}"
+                  placeholder="Department">
+              </mat-form-field>
+
+            </div>
+            <div class="input-row" style="width: 45%;">
+              <div style="display: flex; flex-direction: row; align-items: center;">
+                <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;">
+                  <mat-label>Date</mat-label>
+                  <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="employeeControl">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+
+                </mat-form-field>
+
+                <mat-form-field class="mat-input" appearance="outline"
+                  style="width: 45%;  padding-top: 5px; margin-left: 10px;">
+                  <mat-label>D O A</mat-label>
+                  <input matInput type="text" [(ngModel)]="doa" [ngModelOptions]="{standalone: true}"
+                    placeholder="D O A">
+                </mat-form-field>
+
+              </div>
+            </div>
+            <div class="input-row " style="width: 45%; padding-top: 10px;">
+              <h6 style="color: red; font-weight: 600;">Each Of the item below must be returned or completed upon
+                termination and before issuance of final pay check</h6>
+            </div>
+
+            <!-- <div class="input-row " style="width: 45%;">
+              <div style="display: flex; justify-content: flex-end; padding-top: 5px;">
+                <button mat-raised-button class="success-button"
+                  style="color: white; background-color: #d60035; margin-right: 10px;" (click)="cancel()">
+                  Cancel
+                </button>
+                <button mat-raised-button class="success-button" style="color: white; background-color: #156EF3; "
+                  (click)="save()">
+                  Save
+                </button>
+
+              </div>
+            </div> -->
+          </div>
+        </form>
+        <hr style="margin: 5px; border: 0; border-top: 2px solid rgb(212, 206, 206);">
+
+        <div fxLayout="column" style="width: 45%;">
+          <mat-tab-group>
+            <mat-tab label="Returns ">
+
+              <div style="display: flex; flex-direction: row;">
+                <div style="flex: 1;">
+                  <div>
+                    <div class="tableSection " style="padding-top: 10px; width: 100%;">
+
+                      <table mat-table [dataSource]="userDataSource" class="mat-elevation-z8 demo-table table-cell"
+                        style="border-radius: 15px; overflow: hidden; width: 100%;">
+
+                        <ng-container matColumnDef="returns">
+                          <th mat-header-cell *matHeaderCellDef class="table-header"
+                            style="width: 85px; text-align: left;">
+                            <input type="checkbox" id="returns" name="returns"> Returns
+                          </th>
+                          <td mat-cell *matCellDef="let element" class="table-data">
+                            <input type="checkbox" id="epf" name="select" [(ngModel)]="element.select">{{
+                            element.returns }}
+                          </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedReturns" style="height: 50px;"></tr>
+                        <tr mat-row [ngClass]="{
+                    'inactive-row': !element.activeStatus
+                  }" *matRowDef="let element; columns: displayedReturns;  let rowIndex = index"
+                    style="height: 10px; cursor: pointer; " (click)="onRowClick(rowIndex)"[ngStyle]="getRowStyle(rowIndex)"  class="hovered-row" >
+                        </tr>
+                      </table>
+                      <!-- <div *ngIf="isLoading" class="loader">
+    
+                    <mat-spinner diameter="70"></mat-spinner>
+                  </div> -->
+                      <!-- <mat-paginator [length]="length" [pageIndex]="pageIndex" [pageSize]="pageSize"
+                    [pageSizeOptions]="[10,20,35,50]" style="border-radius: 15px; overflow: hidden; width: 100%;"
+                    (page)="getServerData($event)" aria-label="Select page of periodic elements">
+                  </mat-paginator> -->
+                    </div>
+                  </div>
+                </div>
+                <div style="flex: 1;">
+                  <div>
+                    <div class="tableSection " style="padding-top: 10px; width: 100%;">
+    
+                      <table mat-table [dataSource]="completeDataSource" class="mat-elevation-z8 demo-table table-cell"
+                        style="border-radius: 15px; overflow: hidden; width: 100%;">
+    
+                        <ng-container matColumnDef="complete">
+                          <th mat-header-cell *matHeaderCellDef class="table-header" style="width: 85px; text-align: left;">
+                            <input type="checkbox" id="complete" name="complete"> Complete
+                          </th>
+                          <td mat-cell *matCellDef="let element" class="table-data">
+                            <input type="checkbox" id="epf" name="select" [(ngModel)]="element.select">{{
+                            element.complete }}
+                          </td>
+                        </ng-container>
+    
+                        <tr mat-header-row *matHeaderRowDef="displayedComplete" style="height: 50px;"></tr>
+                        <tr mat-row [ngClass]="{
+                  'inactive-row': !element.activeStatus
+                }" *matRowDef="let element; columns: displayedComplete;  let rowIndex = index"
+                    style="height: 10px; cursor: pointer; " (click)="onRowClick(rowIndex)"[ngStyle]="getRowStyle(rowIndex)"  class="hovered-row" >
+                        </tr>
+                      </table>
+                      <!-- <div *ngIf="isLoading" class="loader">
+    
+                  <mat-spinner diameter="70"></mat-spinner>
+                </div> -->
+                      <!-- <mat-paginator [length]="length" [pageIndex]="pageIndex" [pageSize]="pageSize"
+                  [pageSizeOptions]="[10,20,35,50]" style="border-radius: 15px; overflow: hidden; width: 100%;"
+                  (page)="getServerData($event)" aria-label="Select page of periodic elements">
+                </mat-paginator> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </mat-tab>
+            <mat-tab label="Inventory"> Content 2 </mat-tab>
+            <mat-tab label="More Info">
+              <div class="input-row " style="width: 70%;height: 100px;padding-top: 10px;">
+
+                <mat-form-field class="mat-input" appearance="outline"
+                  style=" padding-top: 5px; width: 100%; padding-right: 10px; height: 100%; ">
+                  <mat-label>Comments</mat-label>
+                  <textarea matInput [(ngModel)]="comments" [ngModelOptions]="{standalone: true}"
+                    placeholder="Comments"></textarea>
+
+                </mat-form-field>
+
+              </div>
+            </mat-tab>
+            <mat-tab label="Loan Info">
+              <div>
+                <div class="tableSection " style="padding-top: 10px; width: 100%;">
+
+                  <table mat-table [dataSource]="loanDataSource" class="mat-elevation-z8 demo-table table-cell"
+                    style="border-radius: 15px; overflow: hidden; width: 100%;">
+
+                    <ng-container matColumnDef="loanId">
+                      <th mat-header-cell *matHeaderCellDef class="table-header" style="width: 85px; text-align: center;">
+                         Loan ID
+                      </th>
+                      <td mat-cell *matCellDef="let element" class="table-data">
+                       {{
+                        element.loanId }}
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="loanType">
+                      <th mat-header-cell *matHeaderCellDef class="table-header" style="width: 85px; text-align: center;">
+                         Loan Type
+                      </th>
+                      <td mat-cell *matCellDef="let element" class="table-data">
+                       {{
+                        element.loanType }}
+                      </td>
+                    </ng-container> <ng-container matColumnDef="loanValue">
+                      <th mat-header-cell *matHeaderCellDef class="table-header" style="width: 85px; text-align: center;">
+                         Loan Value
+                      </th>
+                      <td mat-cell *matCellDef="let element" class="table-data">
+                       {{
+                        element.loanValue }}
+                      </td>
+                    </ng-container> <ng-container matColumnDef="outStanding">
+                      <th mat-header-cell *matHeaderCellDef class="table-header" style="width: 85px; text-align: center;">
+                        OutStanding
+                      </th>
+                      <td mat-cell *matCellDef="let element" class="table-data">
+                       {{
+                        element.outStanding }}
+                      </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedLoan" style="height: 50px;"></tr>
+                    <tr mat-row [ngClass]="{
+              'inactive-row': !element.activeStatus
+            }" *matRowDef="let element; columns: displayedLoan;  let rowIndex = index"
+                    style="height: 10px; cursor: pointer; " (click)="onRowClick(rowIndex)"[ngStyle]="getRowStyle(rowIndex)"  class="hovered-row" >
+                    </tr>
+                  </table>
+                  <!-- <div *ngIf="isLoading" class="loader">
+
+              <mat-spinner diameter="70"></mat-spinner>
+            </div> -->
+                  <!-- <mat-paginator [length]="length" [pageIndex]="pageIndex" [pageSize]="pageSize"
+              [pageSizeOptions]="[10,20,35,50]" style="border-radius: 15px; overflow: hidden; width: 100%;"
+              (page)="getServerData($event)" aria-label="Select page of periodic elements">
+            </mat-paginator> -->
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

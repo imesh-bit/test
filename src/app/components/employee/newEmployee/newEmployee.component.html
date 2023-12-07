@@ -1,0 +1,883 @@
+<!-- <div fxLayout="row" fxLayoutAlign="space-between" style="padding-top: 10px; padding-left: 10px;">
+  
+  <div>
+    <div class="form-group" style="display: flex; justify-content: flex-end; padding-bottom: 20px;">
+      <mat-icon class="custom-icon" (click)="registerEmployee()" style="font-size: 32px;"
+        matTooltip="Save">save</mat-icon>
+
+      <mat-icon class="custom-icon" style="color: red; padding-right: 50px; font-size: 32px;" matTooltip="Cancel"
+        (click)="cancelRegisterEmployee()">cancel</mat-icon>
+
+
+    </div>
+  </div>
+</div> -->
+<div fxLayout="column" style="padding: 20px;">
+  <div class="box-shadow-div" fxLayout="row" fxLayoutGap="5px" style="padding: 5px; padding-bottom: 5px;">
+    <div fxFlex="50%" class="input-form">
+      <form style="display: flex; flex-direction: column; max-width: 90%;">
+        <div class="column" style="display: flex; flex-direction: column; align-items: start;">
+          <h1 style="font-weight: 500; color: #156EF3;">Basic Information</h1>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <div fxFlex="30%">
+            <div style="display: flex; flex-direction: column; align-items: center;padding-left: 10px;">
+              <img [src]="imageSrc" alt="Default Image" class="user-image">
+              <div style="padding-top: 10px;">
+                <label class="custom-file-input">
+                  <input type="file" (change)="onFileSelected($event)" accept="image/*">
+                  Browse
+                </label>
+              </div>
+            </div>
+          </div>
+          <div fxFlex="80%" style="padding-left: 30px;">
+            <div class="input-row">
+              <mat-form-field class="mat-input" appearance="outline">
+                <mat-label>Employee Full Name</mat-label>
+                <input [ngModelOptions]="{standalone: true}" matInput type="text" [(ngModel)]="empfullname"
+                  placeholder="Employee Full Name">
+
+              </mat-form-field>
+              <!-- <input type="text" class="form-control" id="empfullname" name="empfullname" [(ngModel)]="empfullname"
+                placeholder="Employee Full Name" matTooltip="Employee Full Name"> -->
+            </div>
+
+            <div class="input-row">
+              <div style="display: flex; flex-direction: row; align-items: center;">
+                <mat-form-field class="mat-input" appearance="outline" style="width: 28%; padding-top: 5px;">
+                  <mat-label>Title</mat-label>
+                  <mat-select placeholder="Title" [(ngModel)]="titel" name="titel"
+                    [ngModelOptions]="{standalone: true}">
+                    <mat-option *ngFor="let title of titles" [value]="title">{{ title }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="mat-input" appearance="outline"
+                  style="width: 28%; padding-top: 5px; padding-left: 10px;">
+                  <mat-label>Initials</mat-label>
+                  <input matInput type="text" [(ngModel)]="initials" placeholder="Initials"
+                    [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+                <mat-form-field class="mat-input" appearance="outline"
+                  style="width: 44%; padding-top: 5px; padding-left: 10px;">
+                  <mat-label>Surname</mat-label>
+                  <input matInput type="text" [(ngModel)]="surname" placeholder="Surname"
+                    [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+                <!-- <input type="text" class="form-control" id="surname" name="surname" [(ngModel)]="surname"
+                  style="position: relative;left: 17px; width: 53%;" placeholder="Surname" matTooltip="Surname"> -->
+              </div>
+            </div>
+
+            <div class="input-row ">
+              <div style="display: flex; flex-direction: row; align-items: center;">
+                <mat-form-field class="mat-input" appearance="outline" style="width: 28%; padding-top: 5px;">
+                  <mat-label>Gender</mat-label>
+                  <mat-select placeholder="Gender" [(ngModel)]="gender" name="gender"
+                    [ngModelOptions]="{standalone: true}">
+                    <mat-option *ngFor="let gender of genders" [value]="gender">{{ gender }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <!-- <mat-select placeholder="Gender" [(ngModel)]="gender" name="titel" class="form-control"
+                  matTooltip="Gender" style="width: 34%; border: 1px solid black ; height: 15px;">
+                  <mat-option *ngFor="let gender of genders" [value]="gender">{{ gender }}</mat-option>
+                </mat-select> -->
+                <mat-form-field class="mat-input" appearance="outline"
+                  style="width: 75%; padding-top: 5px; padding-left: 10px;">
+                  <mat-label>Date OF Birth</mat-label>
+                  <input matInput [matDatepicker]="picker" [(ngModel)]="datebirth" placeholder="Date OF Birth"
+                    [ngModelOptions]="{standalone: true}">
+                  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+              </div>
+            </div>
+            <div class="input-row">
+              <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px; ">
+                <mat-label>Employee Address</mat-label>
+                <textarea matInput [(ngModel)]="empaddress1" style="width: 100%; height: 33px; padding: 5px;"
+                  [ngModelOptions]="{standalone: true}" placeholder="Employee Address"></textarea>
+              </mat-form-field>
+            </div>
+
+
+            <div class="input-row">
+              <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 15px;">
+                <mat-label>Tel No</mat-label>
+                <input matInput type="tel" [(ngModel)]="tele" placeholder="Tel No"  [formControl]="teleFormControl">
+                <!-- <mat-error *ngIf="teleFormControl.invalid">Invalid telephone number.</mat-error> -->
+              </mat-form-field>
+            </div>
+            
+            <div class="input-row">
+              <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;">
+                <mat-label>Email Address</mat-label>
+                <input matInput type="email" [(ngModel)]="email" placeholder="Email Address" 
+                       [formControl]="valEmail">
+                <!-- <mat-error *ngIf="valEmail.invalid">{{ getValidateEmail() }}</mat-error> -->
+              </mat-form-field>
+            </div>
+            
+            <div class="input-row">
+              <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px; ">
+                <mat-label>Employee NIC</mat-label>
+                <input matInput type="text" [(ngModel)]="nic" placeholder="NIC No"
+                  [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
+
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div fxFlex="50%" class="input-form">
+      <!-- <div fxFlex="50%" > -->
+      <form style="display: flex; flex-direction: column; max-width: 90%;">
+        <div class="column" style="display: flex; flex-direction: column; align-items: start;">
+          <h1 style="font-weight: 500; color: #156EF3;">Company Information</h1>
+        </div>
+
+        <div class="input-row">
+          <div style="display: flex; flex-direction: row; align-items: center; ">
+            <mat-form-field class="mat-input" appearance="outline" style="width: 50%; padding-right: 10px; ">
+              <mat-label>Employee Sys ID</mat-label>
+              <input matInput type="text" [(ngModel)]="empid" placeholder="<<Employee Sys ID>>" readonly
+                [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+            <mat-form-field class="mat-input" appearance="outline" style="width: 40%;  padding-right: 10px; ">
+              <mat-label>EPF No</mat-label>
+              <input matInput type="text" [(ngModel)]="empcode" placeholder="<< EPF No >>" [disabled]="epfAuto"
+                [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+            <mat-checkbox matInput [(ngModel)]="epfAuto" (click)="epfAutoSet()" [ngModelOptions]="{standalone: true}"
+              style="width: 10%; " [disabled]="checkAutoEpf" color="primary">Auto</mat-checkbox>
+          </div>
+        </div>
+
+
+
+        <div class="input-row">
+          <div style="display: flex; flex-direction: row; align-items: center; ">
+            <mat-form-field class="mat-input" appearance="outline"
+              style="width: 50%; padding-right: 10px; padding-top: 5px; ">
+              <mat-label>Wage Board</mat-label>
+              <input type="text" matInput [formControl]="wageControl" [matAutocomplete]="auto" placeholder="Wage Board">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let wage of filteredWages | async" [value]="wage">{{ wage
+                  }}</mat-option>
+              </mat-autocomplete>
+
+              <!-- <mat-select matInput [(ngModel)]="categoryid" [ngModelOptions]="{standalone: true}"
+                placeholder="Wage Board">
+                <mat-option *ngFor="let wage of wageBoardOption" [value]="wage.code">
+                  {{ wage.name }}
+                </mat-option>
+              </mat-select> -->
+            </mat-form-field>
+            <mat-form-field class="mat-input" appearance="outline"
+              style="width: 50%; padding-right: 10px; padding-top: 5px;  ">
+              <mat-label>Occupational Group</mat-label>
+              <input type="text" matInput [formControl]="occupationalControl" [matAutocomplete]="auto1"
+                placeholder="Occupational Group">
+              <mat-autocomplete #auto1="matAutocomplete">
+                <mat-option *ngFor="let occ of filteredOccupational | async" [value]="occ">{{ occ
+                  }}</mat-option>
+              </mat-autocomplete>
+              <!-- <mat-select matInput [(ngModel)]="groupid" [ngModelOptions]="{standalone: true}"
+                placeholder="Occupational Group">
+                <mat-option *ngFor="let occupational of occupationOption" [value]="occupational.code">
+                  {{ occupational.name }}
+                </mat-option>
+              </mat-select> -->
+            </mat-form-field>
+
+          </div>
+        </div>
+
+        <div class="input-row">
+          <div style="display: flex; flex-direction: row; align-items: center; ">
+            <mat-form-field class="mat-input" appearance="outline"
+              style="width: 50%; padding-right: 10px; padding-top: 5px;  ">
+              <mat-label>Division</mat-label>
+              <input type="text" matInput [formControl]="divisionControl" [matAutocomplete]="auto2"
+                placeholder="Division">
+              <mat-autocomplete #auto2="matAutocomplete">
+                <mat-option *ngFor="let divi of filteredDivision | async" [value]="divi">{{ divi
+                  }}</mat-option>
+              </mat-autocomplete>
+              <!-- <mat-select matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="division" placeholder="Division">
+                <mat-option *ngFor="let division of divisionOption" [value]="division.name">
+                  {{ division.name }}
+                </mat-option>
+              </mat-select> -->
+            </mat-form-field>
+            <mat-form-field class="mat-input" appearance="outline"
+              style="width: 50%; padding-right: 10px; padding-top: 5px;  ">
+              <mat-label>Designation</mat-label>
+              <input type="text" matInput [formControl]="designationControl" [matAutocomplete]="auto3"
+                placeholder="Designation">
+              <mat-autocomplete #auto3="matAutocomplete">
+                <mat-option *ngFor="let desi of filteredDesignation | async" [value]="desi">{{ desi
+                  }}</mat-option>
+              </mat-autocomplete>
+              <!-- <mat-select matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="designation"
+                placeholder="Designation">
+                <mat-option *ngFor="let designation of designationOption" [value]="designation.name">
+                  {{ designation.name }}
+                </mat-option>
+              </mat-select> -->
+            </mat-form-field>
+
+          </div>
+        </div>
+
+        <div class="input-row">
+          <div style="display: flex; flex-direction: row; align-items: center; ">
+            <mat-form-field class="mat-input" appearance="outline"
+              style="width: 50%; padding-right: 10px; padding-top: 5px;  ">
+              <mat-label>Type Of Employee</mat-label>
+              <input type="text" matInput [formControl]="typeOfEmpControl" [matAutocomplete]="auto4"
+              placeholder="Type Of Employee">
+            <mat-autocomplete #auto4="matAutocomplete">
+              <mat-option *ngFor="let emp of filteredTypeOfEmp| async" [value]="emp">{{ emp
+                }}</mat-option>
+            </mat-autocomplete>
+              <!-- <mat-select matInput [(ngModel)]="typofemp" [ngModelOptions]="{standalone: true}"
+                placeholder="Type Of Employee">
+                <mat-option *ngFor="let typofemp of typeOfEmpOption" [value]="typofemp.name">
+                  {{ typofemp.name }}
+                </mat-option>
+              </mat-select> -->
+            </mat-form-field>
+
+            <mat-form-field class="mat-input" appearance="outline"
+              style="width: 50%; padding-right: 10px; padding-top: 5px;  ">
+              <mat-label>Status</mat-label>
+              <mat-select matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="status" placeholder="Status">
+                <mat-option *ngFor="let status of statusonOption" [value]="status">
+                  {{ status }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </div>
+        </div>
+
+        <div class="input-row">
+          <div style="display: flex; flex-direction: row; align-items: center; ">
+            <mat-form-field class="mat-input" appearance="outline"
+              style="width: 50%; padding-right: 10px; padding-top: 5px;  ">
+              <mat-label>Appointment Date</mat-label>
+              <input matInput [matDatepicker]="picker1" [(ngModel)]="dateappointment" placeholder="Appointment Date"
+                [ngModelOptions]="{standalone: true}">
+              <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="mat-input" appearance="outline"
+              style="width: 50%; padding-right: 10px; padding-top: 5px;  ">
+              <mat-label>Probation End Date</mat-label>
+              <input matInput [matDatepicker]="picker2" [(ngModel)]="probationenddate" placeholder="Probation End Date"
+                [ngModelOptions]="{standalone: true}">
+              <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+            <!-- <input type="date" class="form-control " id="certName" name="certName" [(ngModel)]="dateappointment"
+              placeholder="Appointment Date" matTooltip="Appointment Date">
+            <input type="date" class="form-control " id="certName" name="certName" [(ngModel)]="probationenddate"
+              style="position: relative; left: 15px;" matTooltip="Probation End Date"> -->
+          </div>
+        </div>
+        <div class="input-row">
+
+        </div>
+        <div class="input-row">
+          <mat-form-field class="mat-input" appearance="outline"
+            style="width: 98%; padding-right: 10px; padding-top: 5px;  ">
+            <mat-label>More Info</mat-label>
+            <textarea matInput [(ngModel)]="remarks" style="width: 100%; height: 33px; padding: 5px;"
+              [ngModelOptions]="{standalone: true}" placeholder="More Info"></textarea>
+          </mat-form-field>
+          <!-- <textarea class="form-control textarea-style" id="comments" name="comments" style="height: 70px;"
+            [(ngModel)]="remarks" placeholder="More Info" matTooltip="More Info"></textarea> -->
+        </div>
+      </form>
+
+      <!-- </div> -->
+      <!-- <div fxFlex="50%"></div> -->
+
+    </div>
+  </div>
+  <div class="box-shadow-div" fxLayout="row" fxLayoutGap="5px">
+    <div fxFlex="50%" class="input-form">
+      <form style="display: flex; flex-direction: column; max-width: 90%;">
+        <div class="column" style="display: flex; flex-direction: column; align-items: start;">
+          <h1 style="font-weight: 500; color: #156EF3;">Salary Information</h1>
+        </div>
+        <div class="input-row">
+          <div style="display: flex; flex-direction: row; align-items: center; ">
+
+            <div fxLayout="row" fxLayoutAlign="start center"
+              style=" border-bottom: 2px solid rgb(148, 12, 91); height: 30px; background:#edf1f7;width: 49%;">
+              <h3 style="margin: 0; padding: 10px;">Add</h3>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center"
+              style=" border-bottom: 2px solid rgb(148, 12, 91); height: 30px; background:#edf1f7;position: relative;left: 10px;width: 49%;">
+              <h3 style="margin: 0; padding: 10px;">Deduction</h3>
+            </div>
+          </div>
+        </div>
+        <div class="input-row">
+          <div style="display: flex; flex-direction: row; align-items: center; ">
+            <mat-form-field class="mat-input" appearance="outline"
+              style="width: 50%; padding-top: 5px;  padding-right: 10px; ">
+              <mat-label>Basic Salary</mat-label>
+              <input matInput type="number" [(ngModel)]="basicsalary" placeholder="Basic Salary" style="text-align: right;"
+                [ngModelOptions]="{standalone: true}"  (keyup)="setNetSalary()">
+            </mat-form-field>
+            <mat-form-field class="mat-input" appearance="outline" style="width: 50%;padding-top: 5px;  ">
+              <mat-label>{{labelD1}}</mat-label>
+              <input matInput type="number" [(ngModel)]="deduct1" [placeholder]="labelD1" style="text-align: right;"
+                [ngModelOptions]="{standalone: true}"  (keyup)="setNetSalary()">
+            </mat-form-field>
+            <!-- <input type="number" class="form-control " id="certName" name="certName" [(ngModel)]="basicsalary" 
+              placeholder="Basic Salary" matTooltip="Basic Salary" >
+            <input type="number" class="form-control" id="deduct1" name="deduct1" style="position: relative;left: 10px;"
+               [(ngModel)]="deduct1" [placeholder]="labelD1" [matTooltip]="labelD1" (keyup)="setNetSalary()"> -->
+
+          </div>
+        </div>
+        <div class="input-row">
+          <div style="display: flex; flex-direction: row; align-items: center; ">
+            <mat-form-field class="mat-input" appearance="outline"
+              style="width: 50%; padding-top: 5px;  padding-right: 10px; ">
+              <mat-label>Budgetary Allowance 1</mat-label>
+              <input matInput type="number" [(ngModel)]="budgetallowance1" placeholder="Budgetary Allowance 1" style="text-align: right;"
+                [ngModelOptions]="{standalone: true}"  (keyup)="setNetSalary()">
+            </mat-form-field>
+            <mat-form-field class="mat-input" appearance="outline" style="width: 50%; padding-top: 5px; ">
+              <mat-label>{{labelD2}}</mat-label>
+              <input matInput type="number" [(ngModel)]="deduct2" [placeholder]="labelD2" style="text-align: right;"
+                [ngModelOptions]="{standalone: true}"  (keyup)="setNetSalary()">
+            </mat-form-field>
+            <!-- <input type="number" class="form-control " id="certName" name="certName" [(ngModel)]="budgetallowance1"
+               placeholder="Budgetary Allowance 1" matTooltip="Budgetary Allowance 1" (keyup)="setNetSalary()">
+
+            <input type="number" class="form-control" id="deduct2" name="deduct2" style="position: relative;left: 10px;"
+               [(ngModel)]="deduct2" [placeholder]="labelD2" [matTooltip]="labelD2" (keyup)="setNetSalary()"> -->
+
+          </div>
+        </div>
+        <div class="input-row">
+          <div style="display: flex; flex-direction: row; align-items: center; ">
+            <mat-form-field class="mat-input" appearance="outline"
+              style="width: 50%; padding-top: 5px;  padding-right: 10px; ">
+              <mat-label>Budgetary Allowance 2</mat-label>
+              <input matInput type="number" [(ngModel)]="budgetallowance2" placeholder="Budgetary Allowance 2" style="text-align: right;"
+                [ngModelOptions]="{standalone: true}"  (keyup)="setNetSalary()">
+            </mat-form-field>
+            <mat-form-field class="mat-input" appearance="outline" style="width: 50%; padding-top: 5px; ">
+              <mat-label>{{labelD3}}</mat-label>
+              <input matInput type="number" [(ngModel)]="deduct3" [placeholder]="labelD3" style="text-align: right;"
+                [ngModelOptions]="{standalone: true}"  (keyup)="setNetSalary()">
+            </mat-form-field>
+            <!-- <input type="number" class="form-control " id="certName" name="certName" [(ngModel)]="budgetallowance2"
+               placeholder="Budgetary Allowance 2" matTooltip="Budgetary Allowance 2" (keyup)="setNetSalary()">
+            <input type="number" class="form-control" id="deduct3" name="deduct3" style="position: relative;left: 10px;"
+               [(ngModel)]="deduct3" [placeholder]="labelD3" [matTooltip]="labelD3" (keyup)="setNetSalary()"> -->
+
+          </div>
+        </div>
+        <div class="input-row">
+          <div style="display: flex; flex-direction: row; align-items: center; ">
+            <mat-form-field class="mat-input" appearance="outline"
+              style="width: 50%; padding-top: 5px;  padding-right: 10px; ">
+              <mat-label>{{labelA1}}</mat-label>
+              <input matInput type="number" [(ngModel)]="allow1" [placeholder]="labelA1" [disabled]="!allow1_status" style="text-align: right;"
+                [ngModelOptions]="{standalone: true}"  (keyup)="setNetSalary()">
+            </mat-form-field>
+            <mat-form-field class="mat-input" appearance="outline" style="width: 50%;padding-top: 5px;  ">
+              <mat-label>{{labelD4}}</mat-label>
+              <input matInput type="number" [(ngModel)]="deduct4" [placeholder]="labelD4" style="text-align: right;"
+                [ngModelOptions]="{standalone: true}"  (keyup)="setNetSalary()">
+            </mat-form-field>
+            <!-- <input type="number" class="form-control " id="allow1" name="allow1" [(ngModel)]="allow1" 
+              [placeholder]="labelA1" [matTooltip]="labelA1" (keyup)="setNetSalary()">
+            <input type="number" class="form-control" id="deduct4" name="deduct4" style="position: relative;left: 10px;"
+               [(ngModel)]="deduct4" [placeholder]="labelD4" [matTooltip]="labelD4" (keyup)="setNetSalary()"> -->
+
+          </div>
+        </div>
+        <div class="input-row">
+          <div style="display: flex; flex-direction: row; align-items: center; ">
+            <mat-form-field class="mat-input" appearance="outline"
+              style="width: 50%; padding-top: 5px;  padding-right: 10px; ">
+              <mat-label>{{labelA2}}</mat-label>
+              <input matInput type="number" [(ngModel)]="allow2" [placeholder]="labelA2"  [disabled]="!allow2_status" style="text-align: right;"
+                [ngModelOptions]="{standalone: true}"  (keyup)="setNetSalary()">
+            </mat-form-field>
+            <mat-form-field class="mat-input" appearance="outline" style="width: 50%; padding-top: 5px; ">
+              <mat-label>{{labelD5}}</mat-label>
+              <input matInput type="number" [(ngModel)]="deduct5" [placeholder]="labelD5" style="text-align: right;"
+                [ngModelOptions]="{standalone: true}"  (keyup)="setNetSalary()">
+            </mat-form-field>
+            <!-- <input type="number" class="form-control " id="allow2" name="allow2" [(ngModel)]="allow2" 
+              [placeholder]="labelA2" [matTooltip]="labelA2" (keyup)="setNetSalary()">
+            <input type="number" class="form-control" id="deduct5" name="deduct5" style="position: relative;left: 10px;"
+               [(ngModel)]="deduct5" [placeholder]="labelD5" [matTooltip]="labelD5" (keyup)="setNetSalary()"> -->
+
+          </div>
+        </div>
+        <div class="input-row">
+          <div style="display: flex; flex-direction: row; align-items: center; ">
+            <mat-form-field class="mat-input" appearance="outline"
+              style="width: 49%;  padding-right: 10px; padding-top: 5px; ">
+              <mat-label>{{labelA3}}</mat-label>
+              <input matInput type="number" [(ngModel)]="allow3" [placeholder]="labelA3"  [disabled]="!allow3_status" style="text-align: right;"
+                [ngModelOptions]="{standalone: true}"  (keyup)="setNetSalary()">
+            </mat-form-field>
+            <!-- <input type="number" class="form-control " id="allow3" name="allow3" [(ngModel)]="allow3" 
+              [placeholder]="labelA3" style="width: 46%;" [matTooltip]="labelA3" (keyup)="setNetSalary()"> -->
+
+          </div>
+        </div>
+        <div class="input-row">
+          <div style="display: flex; flex-direction: row; align-items: center; ">
+            <mat-form-field class="mat-input" appearance="outline"
+              style="width: 49%;  padding-right: 10px;padding-top: 5px;  ">
+              <mat-label>{{labelA4}}</mat-label>
+              <input matInput type="number" [(ngModel)]="allow4" [placeholder]="labelA4"  [disabled]="!allow4_status" style="text-align: right;"
+                [ngModelOptions]="{standalone: true}"  (keyup)="setNetSalary()">
+            </mat-form-field>
+            <!-- <input type="number" class="form-control " id="allow4" name="allow4" [(ngModel)]="allow4" 
+              [placeholder]="labelA4" style="width: 46%;" [matTooltip]="labelA4" (keyup)="setNetSalary()"> -->
+
+          </div>
+        </div>
+        <div class="input-row">
+          <div style="display: flex; flex-direction: row; align-items: center; ">
+            <mat-form-field class="mat-input" appearance="outline"
+              style="width: 49%;  padding-right: 10px; padding-top: 5px; ">
+              <mat-label>{{labelA5}}</mat-label>
+              <input matInput type="number" [(ngModel)]="allow5" [placeholder]="labelA5"  [disabled]="!allow5_status" style="text-align: right;"
+                [ngModelOptions]="{standalone: true}"  (keyup)="setNetSalary()">
+            </mat-form-field>
+            <!-- <input type="number" class="form-control " id="allow5" name="allow5" [(ngModel)]="allow5" 
+              [placeholder]="labelA5" style="width: 46%;" [matTooltip]="labelA5" (keyup)="setNetSalary()"> -->
+
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div fxFlex="70%" class="input-form">
+      <form style="display: flex; flex-direction: column; max-width: 90%;">
+        <div class="column" style="display: flex; flex-direction: column; align-items: start;">
+          <h1 style="font-weight: 500; color: #156EF3;">Banking Information</h1>
+        </div>
+        <div>
+          <h3 style="color: #000000;font-weight: 500;">Total Net Salary = {{totalNetSalary}}</h3>
+        </div>
+        <div class="input-row">
+          <mat-form-field class="mat-input" appearance="outline" style="width: 98%; padding-top: 5px; ">
+            <mat-label>Bank One</mat-label>
+            <input type="text" matInput [formControl]="bank1Control" [matAutocomplete]="auto5"
+            placeholder="Bank One">
+          <mat-autocomplete #auto5="matAutocomplete">
+            <mat-option *ngFor="let bank of filteredBank| async" [value]="bank">{{ bank
+              }}</mat-option>
+          </mat-autocomplete>
+            <!-- <mat-select [(ngModel)]="bankid1" [ngModelOptions]="{standalone: true}" placeholder="Bank One">
+              <mat-option *ngFor="let bank of paymentOption" [value]="bank.code">
+                {{ bank.name }}
+              </mat-option>
+            </mat-select> -->
+          </mat-form-field>
+
+        </div>
+        <div class="input-row">
+          <div style="display: flex; flex-direction: row; align-items: center; width: 98%;">
+            <mat-form-field class="mat-input" appearance="outline"
+              style="width: 50%; padding-top: 5px;  padding-right: 10px; ">
+              <mat-label>Account No</mat-label>
+              <input matInput type="number" [(ngModel)]="accno1" placeholder="Account No" style="text-align: right;"
+                [ngModelOptions]="{standalone: true}" >
+            </mat-form-field>
+            <mat-form-field class="mat-input" appearance="outline" style="width: 50%; padding-top: 5px; ">
+              <mat-label>Amount</mat-label>
+              <input matInput type="number" [(ngModel)]="amount1" placeholder="Amount" style="text-align: right;"
+                [ngModelOptions]="{standalone: true}"  (keyup)="setNetSalary()">
+            </mat-form-field>
+            <!-- <input type="number" class="form-control " id="certName" name="certName"  style="width: 110%; "
+              [(ngModel)]="accno1" placeholder="Account No" matTooltip="Account No"> -->
+            <!-- <input type="number" class="form-control " id="certName" name="certName"
+              style="width: 110%; position: relative; left: 20px;" [(ngModel)]="amount1" placeholder="Amount" 
+              matTooltip="Amount"> -->
+          </div>
+
+        </div>
+        <div class="input-row">
+          <mat-form-field class="mat-input" appearance="outline" style="width: 98%; padding-top: 5px; ">
+            <mat-label>Bank Two</mat-label>
+            <input type="text" matInput [formControl]="bank2Control" [matAutocomplete]="auto6"
+            placeholder="Bank Two">
+          <mat-autocomplete #auto6="matAutocomplete">
+            <mat-option *ngFor="let bank of filteredBank2| async" [value]="bank">{{ bank
+              }}</mat-option>
+          </mat-autocomplete>
+            <!-- <mat-select [(ngModel)]="bankid2" [ngModelOptions]="{standalone: true}" placeholder="Bank One">
+              <mat-option *ngFor="let bank of paymentOption" [value]="bank.code">
+                {{ bank.name }}
+              </mat-option>
+            </mat-select> -->
+          </mat-form-field>
+          <!-- <mat-select [(ngModel)]="bankid2" name="certName" class="form-control"
+            style="border: 1px solid black; width: 100%; height: 15px;  " placeholder="Bank Two" matTooltip="Bank Two">
+            <mat-option *ngFor="let bank of paymentOption" [value]="bank.code">
+              {{ bank.name }}
+            </mat-option>
+          </mat-select> -->
+        </div>
+        <div class="input-row">
+          <div style="display: flex; flex-direction: row; align-items: center; width: 98%;">
+            <mat-form-field class="mat-input" appearance="outline"
+              style="width: 50%; padding-top: 5px;  padding-right: 10px; ">
+              <mat-label>Account No</mat-label>
+              <input matInput type="number" [(ngModel)]="accno2" placeholder="Account No"
+                [ngModelOptions]="{standalone: true}" style="text-align: right;" >
+            </mat-form-field>
+            <mat-form-field class="mat-input" appearance="outline" style="width: 50%; padding-top: 5px; ">
+              <mat-label>Amount</mat-label>
+              <input matInput type="number" [(ngModel)]="amount2" placeholder="Amount" style="text-align: right;"
+                [ngModelOptions]="{standalone: true}"  (keyup)="setNetSalary()">
+            </mat-form-field>
+            <!-- <input type="number" class="form-control " id="certName" name="certName"  style="width: 100%; "
+              [(ngModel)]="accno2" placeholder="Account No" matTooltip="Account No">
+            <input type="number"  class="form-control input-style" id="certName" name="certName"
+              style="width: 100%;position: relative; left: 20px;" [(ngModel)]="amount2" placeholder="Amount"
+              matTooltip="Amount"> -->
+          </div>
+
+        </div>
+        <div class="input-row">
+          <!-- <div fxLayout="row" fxLayoutAlign="start center" class="" style="padding-left: 15px;"> -->
+          <span style="color: red; font-size: 14px; position: relative; font-weight: bold;">* Only One
+            Bank
+            Amount Should be Zero</span>
+
+        </div>
+      </form>
+    </div>
+
+
+    <!-- <div fxFlex="50%">
+        <form style="display: flex; flex-direction: column; max-width: 90%;">
+          <div class="column" style="display: flex; flex-direction: column; align-items: start;">
+            <h1 style="font-weight: 500; color: #156EF3;">More Information</h1>
+          </div>
+
+
+        </form>
+
+      </div> -->
+
+  </div>
+  <div class="box-shadow-div" fxLayout="row" fxLayoutGap="5px"  dir="rtl" style="background: white;">
+    <div style="display: flex; flex-direction: row; align-items: center; padding-top: 10px;">
+      <button mat-raised-button class="success-button" style="background-color: #d60035; color: white;"
+        (click)="cancelRegisterEmployee()">Canel</button>
+      <button mat-raised-button class="success-button"
+        style="background-color: #156EF3; color: white; margin-right: 10px;" (click)="registerEmployee()">Save</button>
+
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="loader">
+
+    <mat-spinner diameter="120"></mat-spinner>
+  </div>
+</div>
+
+<!-- Employee Profile -->
+<!-- <div fxLayout="column" style="padding: 20px;">
+  <div class="box-shadow-div">
+     <div fxLayout="row" fxLayoutAlign="space-between">
+    <div fxFlex="50%">
+      <form class="input-form" style="display: flex; flex-direction: column;  max-width: 45%;">
+        <div class="column" style="display: flex; flex-direction: column; align-items: center;">
+          <h1 style="font-weight: 500;">Basic Information</h1>
+        </div>
+        
+      </form>
+    </div>
+    <div fxFlex="50%">
+      <form class="input-form" style="display: flex; flex-direction: column;  max-width: 45%;"></form>
+    </div>
+  </div> -->
+
+<!-- <div fxFlex="45%">
+      <div>
+        <form style="display: flex; flex-direction: column; ">
+          <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+            <label for="certName" class="label-style">NIC No:</label>
+            <input type="text" class="form-control input-style" id="certName" name="nic" [(ngModel)]="nic">
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+            <label for="certName" class="label-style">Date OF Birth:</label>
+            <input type="date" class="form-control input-style" id="certName" name="datebirth" [(ngModel)]="datebirth">
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+            <label for="certName" class="label-style">Tel No:</label>
+            <input type="tel" class="form-control input-style" id="certName" name="tele" [(ngModel)]="tele">
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+            <label for="certName" class="label-style">Email Address:</label>
+            <input type="email" class="form-control input-style" id="certName" name="email" [(ngModel)]="email">
+          </div>
+        </form>
+      </div>
+    </div> -->
+
+<!-- <div fxLayout="column" style="padding: 5px; padding-top: 30px;">
+  <div fxLayout="row" fxLayoutAlign="space-between">
+    <div fxFlex="15%">
+      <mat-chip-listbox class="mat-mdc-chip-set-stacked" aria-label="Color selection">
+        <mat-chip-option *ngFor="let chip of availableOptions; let isFirst = first" [selected]="chip.selected"
+          [ngStyle]="{ 'background-color': chip.selected ? '#5b5b5b' : '' }" (click)="handleChipClick(chip)"
+          style="border-radius: 10px; color: white; height: 40px; font-family: 'Imprima'; font-size: 20px;">
+          {{ chip.name }}
+        </mat-chip-option>
+      </mat-chip-listbox>
+    </div>
+
+    <div fxFlex="85%" style="padding-top: 10px;"> -->
+
+<!-- <div fxFlex="60%" [hidden]="companyDetailsView">
+        <form style="display: flex; flex-direction: column; ">
+          <div fxLayout="row" fxLayoutAlign="start center" class="input-row" style="padding-left: 15px;">
+            <h1 style="font-weight: 500;">Company Details</h1>
+          </div>
+
+        </form>
+      </div>
+
+      <div fxFlex="60%" style="padding-top: 60px;" [hidden]="companyDetailsView">
+        <form style="display: flex; flex-direction: column; ">
+
+
+
+        </form>
+      </div> -->
+
+
+<!-- <div fxFlex="60%" [hidden]="salaryDetailsView">
+        <form style="display: flex; flex-direction: column; ">
+          <div fxLayout="row" fxLayoutAlign="start center" class="input-row" style="padding-left: 15px; ">
+            <h1 style="font-weight: 500;">Salary Details</h1>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center" class="" style="padding-left: 15px;">
+            <h3 style="color: #000000;font-weight: 500;">Total Net Salary = {{certName}}</h3>
+          </div>
+
+          <div style="border: 1px solid black; margin-left: 25px; height: 430px;">
+            <div fxLayout="row" fxLayoutAlign="start center"
+              style=" border-bottom: 2px solid rgb(148, 12, 91); height: 30px; background:#d1d4d3">
+              <h3 style="margin: 0; padding: 10px;">Add</h3>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+              <label for="certName" class="label-style">Basic:</label>
+
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+              <label for="certName" class="label-style">Budgetary Allowance 2:</label>
+
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+              <label for="allow1" class="label-style">{{ labelA1 }}:</label>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+              <label for="allow2" class="label-style">{{ labelA2 }}:</label>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+              <label for="allow3" class="label-style">{{ labelA3 }}:</label>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+              <label for="allow4" class="label-style">{{ labelA4 }}:</label>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+              <label for="allow5" class="label-style">{{ labelA5 }}:</label>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="flex-end center" class="input-row">
+              <label for="certName" class="label-style">{{certName}}</label>
+            </div>
+
+          </div>
+        </form>
+      </div>
+      <div fxFlex="60%" [hidden]="salaryDetailsView">
+        <form style="display: flex; flex-direction: column; ">
+
+          <div style="border: 1px solid black; margin-left: 25px; height: 430px; margin-top: 100px;">
+            <div fxLayout="row" fxLayoutAlign="start center"
+              style=" border-bottom: 2px solid rgb(148, 12, 91); height: 30px; background:#d1d4d3">
+              <h3 style="margin: 0; padding: 10px;">Deduction</h3>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+              <label for="deduct1" class="label-style">{{ labelD1 }}:</label>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+              <label for="deduct2" class="label-style">{{ labelD2 }}:</label>
+              <input type="number" class="form-control input-style" id="deduct2" name="deduct2" [(ngModel)]="deduct2">
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+              <label for="deduct3" class="label-style">{{ labelD3 }}:</label>
+              <input type="number" class="form-control input-style" id="deduct3" name="deduct3" [(ngModel)]="deduct3">
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+              <label for="deduct4" class="label-style">{{ labelD4 }}:</label>
+              <input type="number" class="form-control input-style" id="deduct4" name="deduct4" [(ngModel)]="deduct4">
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+              <label for="deduct5" class="label-style">{{ labelD5 }}:</label>
+              <input type="number" class="form-control input-style" id="deduct5" name="deduct5" [(ngModel)]="deduct5">
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="flex-end center" class="input-row">
+              <label for="certName" class="label-style">{{certName}}</label>
+            </div>
+
+
+          </div>
+        </form>
+      </div>
+      <div fxFlex="60%" [hidden]="bankingDetailsView">
+        <form style="display: flex; flex-direction: column; ">
+          <div fxLayout="row" fxLayoutAlign="start center" class="input-row" style="padding-left: 15px;">
+
+          </div>
+
+
+          <div style=" margin-left: 25px; ">
+            <div fxLayout="row" fxLayoutAlign="center center"
+              style="border-bottom: 2px solid rgb(148, 12, 91); height: 30px; background:#d1d4d3;">
+              <h3 style="margin: 0; padding: 10px;">Payment Type</h3>
+            </div>
+
+
+            <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+              <mat-select [(ngModel)]="bankid1" name="certName" class="input-style"
+                style="border: 1px solid black; width: 100%;   height: 15px;">
+                <mat-option *ngFor="let bankid1 of paymentOption" [value]="bankid1">
+                  {{ bankid1 }}
+                </mat-option>
+              </mat-select>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+              <mat-select [(ngModel)]="bankid2" name="certName" class="input-style"
+                style="border: 1px solid black; width: 100%;  height: 15px;">
+                <mat-option *ngFor="let bankid2 of paymentOption" [value]="bankid2">
+                  {{ bankid2 }}
+                </mat-option>
+              </mat-select>
+            </div>
+
+          </div>
+        </form>
+      </div>
+      <div fxFlex="60%" [hidden]="bankingDetailsView">
+        <form style="display: flex; flex-direction: column; ">
+
+          <div style=" margin-left: 25px; margin-top: 106px;">
+            <div fxLayout="row" fxLayoutAlign="center center"
+              style="border-bottom: 2px solid rgb(148, 12, 91); height: 30px; background:#d1d4d3;">
+              <h3 style="margin: 0; padding: 10px;">Account Number</h3>
+            </div>
+
+
+            <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+
+            </div>
+
+          </div>
+        </form>
+      </div>
+      <div fxFlex="40%" [hidden]="bankingDetailsView">
+        <form style="display: flex; flex-direction: column; ">
+
+          <div style=" margin-left: 25px; margin-top: 106px;">
+            <div fxLayout="row" fxLayoutAlign="center center"
+              style="border-bottom: 2px solid rgb(148, 12, 91); height: 30px; background:#d1d4d3;">
+              <h3 style="margin: 0; padding: 10px;">Amount</h3>
+            </div>
+
+
+            <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+
+            </div>
+
+          </div>
+        </form>
+      </div>
+
+      <div fxFlex="40%" [hidden]="epfDetailsView">
+        <form style="display: flex; flex-direction: column; ">
+          <div fxLayout="row" fxLayoutAlign="start center" class="input-row" style="padding-left: 15px;">
+            <h1 style="font-weight: 500;">EPF Details</h1>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+            <label class="label-style">EPF Status :</label>
+            <div class="radio-group">
+              <label for="epf" class="radio-label">
+                <input type="checkbox" id="epf" name="gender" class="radio-input">
+                EPF
+              </label>
+
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+            <label for="certName" class="label-style">EPF No:</label>
+            <input type="text" class="form-control input-style" id="certName" name="certName" [(ngModel)]="epfno">
+
+
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center" class="input-row">
+            <label for="certName" class="label-style">EPF Starts On:</label>
+            <input type="date" class="form-control input-style" id="certName" name="certName"
+              [(ngModel)]="epfstartdate">
+
+
+          </div>
+
+        </form>
+      </div>
+      <div fxFlex="100%" [hidden]="moreInfoDetailsView">
+        <form style="display: flex; flex-direction: column; ">
+          <div fxLayout="row" fxLayoutAlign="start center" class="input-row" style="padding-left: 15px;">
+            <h1 style="font-weight: 500;">More Info</h1>
+          </div>
+
+          <div fxLayout="column" fxLayoutAlign="start start" class="input-row" style="padding-left: 25px;">
+            <label class="label-style" style="padding-left: 0;padding-right: 0; width: 60%; text-align: start;">More
+              Info:</label>
+
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div> -->
+
+<!-- </div> -->

@@ -1,0 +1,125 @@
+<div fxLayout="column" style="padding: 10px;">
+  <div class="box-shadow-div" fxLayout="row" fxLayoutGap="5px" style="padding: 5px; padding-bottom: 5px;">
+    <div fxFlex="100%" class="input-form">
+      <form style="display: flex; flex-direction: column; max-width: 100%;">
+        <div class="column" style="display: flex; flex-direction: column; align-items: start;">
+          <!-- <h1 style="font-weight: 500; color: #156EF3;">NonCash Benfit</h1> -->
+        </div>
+        <div fxLayout="row" fxFlex="100%">
+
+          <div fxLayout="column" fxFlex="30%" fxLayoutAlign="space-between">
+            <div class="input-row">
+              <!-- <div class="input-row">
+              <div style="display: flex; flex-direction: row; align-items: center; ">
+              </div>
+            </div> -->
+              <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;  ">
+                <mat-label>NonCash 1</mat-label>
+                <input matInput type="text" [(ngModel)]="nonecash1" [placeholder]="nonecash1"
+                  [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
+
+            </div>
+            <div class="input-row">
+              <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;  ">
+                <mat-label>NonCash 2</mat-label>
+                <input matInput type="text" [(ngModel)]="nonecash2" [placeholder]="nonecash2"
+                  [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
+
+            </div>
+            <div class="input-row">
+              <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;  ">
+                <mat-label>NonCash 3</mat-label>
+                <input matInput type="text" [(ngModel)]="nonecash3" [placeholder]="nonecash3"
+                  [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
+
+            </div>
+            <div class="input-row">
+              <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;  ">
+                <mat-label>NonCash 4</mat-label>
+                <input matInput type="text" [(ngModel)]="nonecash4" [placeholder]="nonecash4"
+                  [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
+
+            </div>
+            <div class="input-row">
+              <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;  ">
+                <mat-label>NonCash 5</mat-label>
+                <input matInput type="text" [(ngModel)]="nonecash5" [placeholder]="nonecash5"
+                  [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
+
+            </div>
+
+            
+
+          </div>
+          <div fxLayout="column" fxFlex="30%" fxLayoutAlign="space-between" style="margin-left: 10px;">
+            <div class="input-row">
+              <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;  ">
+                <mat-label>NonCash 6</mat-label>
+                <input matInput type="text" [(ngModel)]="nonecash6" [placeholder]="nonecash6"
+                  [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
+
+            </div>
+            <div class="input-row">
+              <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;  ">
+                <mat-label>NonCash 7</mat-label>
+                <input matInput type="text" [(ngModel)]="nonecash7" [placeholder]="nonecash7"
+                  [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
+
+            </div>
+            <div class="input-row">
+              <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;  ">
+                <mat-label>NonCash 8</mat-label>
+                <input matInput type="text" [(ngModel)]="nonecash8" [placeholder]="nonecash8"
+                  [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
+
+            </div>
+            <div class="input-row">
+              <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;  ">
+                <mat-label>NonCash 9</mat-label>
+                <input matInput type="text" [(ngModel)]="nonecash9" [placeholder]="nonecash9"
+                  [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
+
+            </div>
+            <div class="input-row">
+              <mat-form-field class="mat-input" appearance="outline" style="width: 100%; padding-top: 5px;  ">
+                <mat-label>NonCash 10</mat-label>
+                <input matInput type="text" [(ngModel)]="nonecash10" [placeholder]="nonecash10"
+                  [ngModelOptions]="{standalone: true}">
+              </mat-form-field>
+
+            </div>
+            
+          </div>
+
+        </div>
+        <div class="input-row" style="display: flex; justify-content: flex-end; width: 61%;">
+          
+          <button mat-raised-button class="success-button" style="margin-right: 10px;background-color: #156EF3;color: white;"
+            (click)="save()">
+            Save
+          </button>
+          <button mat-raised-button class="success-button"
+            style="background-color: #d60035; color: white;" (click)="cancel()">
+            Cancel
+          </button>
+        </div>
+      </form>
+     
+      <!-- <form style="display: flex; flex-direction: column; max-width: 50%;">
+        
+      </form> -->
+    </div>
+
+  </div>
+
+
+</div>
