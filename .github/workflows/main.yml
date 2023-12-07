@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -15,9 +16,9 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 18  # Adjust the Node.js version based on your requirements
 
-      - name: Install Dependencies
+      - name: Install Dependencies and Angular CLI
         run: |
           npm install
           npm install -g @angular/cli
@@ -26,12 +27,12 @@ jobs:
         run: ng build --prod
 
       - name: Copy Artifacts to VM
-        uses: appleboy/scp-action@v0.3.0
+        uses: softprops/action-gh-release@v1
         with:
-          host: ${{ secrets.VM_HOST }}
-          username: ${{ secrets.VM_USERNAME }}
+          files: dist/*  # Adjust this pattern based on your build output
+          endpoint: ${{ secrets.VM_HOST }}
+          user: ${{ secrets.VM_USERNAME }}
           key: ${{ secrets.VM_SSH_KEY }}
-          source: dist/  # Adjust this path based on your build output
           target: /path/to/your/app  # Adjust this path on your VM
 
       - name: SSH into VM and Restart App
