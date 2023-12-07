@@ -12,6 +12,13 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Convert OpenSSH Key to PEM
+        run: |
+          # Convert OpenSSH key to PEM format
+          echo "${{ secrets.VM_SSH_KEY }}" | base64 --decode | ssh-keygen -p -m PEM > /tmp/private_key.pem
+          # Set permissions
+          chmod 600 /tmp/private_key.pem
+
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
