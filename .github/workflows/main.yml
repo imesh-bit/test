@@ -1,4 +1,4 @@
-name: Build Angular App
+name: Build and Copy to VM
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  build_and_copy:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,14 +16,27 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18  # Set the required Node.js version
-          check-latest: true  # Ensure the latest version is used
+          node-version: 18  # Adjust the Node.js version based on your requirements
 
       - name: Install Dependencies and Angular CLI
         run: |
-          npm install --force
+          npm install
           npm install -g @angular/cli
 
       - name: Build Angular App
         run: ng build --configuration=production
 
+      - name: Archive Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: dist
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
+          path: dist
+
+      - name: Copy Artifacts to VM
+        run: scp -r -i ${{ secrets.VM_SSH_KEY }} dist/ ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }}:/path/to/your/app
