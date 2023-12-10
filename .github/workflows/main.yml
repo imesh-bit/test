@@ -16,15 +16,20 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 14  # Use the appropriate Node.js version
 
       - name: Install Dependencies and Angular CLI
         run: |
-          npm install --force
+          npm ci
           npm install -g @angular/cli
 
       - name: Build Angular App
-        run: ng build --configuration=production --deploy-url=/payroll/
+        run: ng build payroll_ui --configuration=production
+
+      - name: Debug Angular Build Output
+        run: |
+          ls -la dist
+          ls -la dist/*
 
       - name: Use SSH private key
         run: |
@@ -32,6 +37,9 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 178.128.221.82 >> ~/.ssh/known_hosts
+
+      - name: Debug SSH Connection
+        run: ssh -i ~/.ssh/id_rsa root@178.128.221.82 "ls /var/www/payroll"
 
       - name: Copy Build Files to Server
         run: scp -r -i ~/.ssh/id_rsa dist/* root@178.128.221.82:/var/www/payroll
