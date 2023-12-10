@@ -26,7 +26,6 @@ jobs:
       - name: Build Angular App
         run: ng build --configuration=production
 
-   
       - name: Use SSH private key
         run: |
           mkdir -p ~/.ssh
