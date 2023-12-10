@@ -24,7 +24,7 @@ jobs:
           npm install -g @angular/cli
 
       - name: Build Angular App
-        run: ng build --configuration=production  --baseHref=/payroll/
+        run: ng build --configuration=production --deploy-url=/payroll/
 
       - name: Use SSH private key
         run: |
