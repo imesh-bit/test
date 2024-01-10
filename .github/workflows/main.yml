@@ -1,4 +1,4 @@
-name: SonarCloud Analysis
+name: SonarCloud analysis
 
 on:
   push:
@@ -23,12 +23,12 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '18'
 
       - name: Install Dependencies and Angular CLI
         run: |
           npm install -force
-
+          npm install -g @angular/cli
       - name: Build Angular app
         run: ng build payroll_ui --configuration=production
 
@@ -42,5 +42,4 @@ jobs:
           args:
             -Dsonar.projectKey=imesh-bit_test
             -Dsonar.organization=imesh-bit
-     
-
+            -Dsonar.sources=src
