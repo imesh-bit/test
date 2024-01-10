@@ -41,6 +41,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args:
-            -Dsonar.projectKey=your_sonarcloud_project_key
-            -Dsonar.organization=your_sonarcloud_organization
+            -Dsonar.projectKey=imesh-bit_test
+            -Dsonar.organization=imesh-bit
             -Dsonar.sources=src
