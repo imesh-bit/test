@@ -1,48 +1,53 @@
-name: Deploy to Server
+name: SonarCloud analysis
 
 on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  pull-requests: read
 
 jobs:
-  deploy:
+  Analysis:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v2
         with:
-          node-version: 18
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
 
-      - name: Install Dependencies and Angular CLI
-        run: |
-          npm install -force
-          npm install -g @angular/cli
+      - name: Make gradlew executable
+        run: chmod +x gradlew
 
-      - name: Build Angular App
-        run: ng build payroll_ui --configuration=production
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
 
-      - name: Debug Angular Build Output
-        run: |
-          ls -la dist
-          ls -la dist/*
+      - name: Build with Gradle
+        run: ./gradlew build -DskipTests
 
-      - name: Use SSH private key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H 178.128.221.82 >> ~/.ssh/known_hosts
-
-      - name: Debug SSH Connection
-        run: ssh -i ~/.ssh/id_rsa root@178.128.221.82 "ls /var/www/payroll"
-
-      - name: Copy Build Files to Server
-        run: scp -r -i ~/.ssh/id_rsa dist/* root@178.128.221.82:/var/www/payroll
-
-      - name: Deploy to Server
-        run: ssh -i ~/.ssh/id_rsa root@178.128.221.82 "echo 'Hello from GitHub Actions!'"
+      - name: Analyze with SonarCloud
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: SonarSource/sonarcloud-github-action@de2e56b42aa84d0b1c5b622644ac17e505c9a049
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args:
+            -Dsonar.projectKey=imesh-bit_test
+            -Dsonar.organization=manushacampus
+            -X
