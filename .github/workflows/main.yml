@@ -28,7 +28,6 @@ jobs:
       - name: Install Dependencies and Angular CLI
         run: |
           npm install -force
-          npm install -g @angular/cli puppeteer
 
       - name: Build Angular app
         run: ng build payroll_ui --configuration=production
@@ -43,9 +42,5 @@ jobs:
           args:
             -Dsonar.projectKey=imesh-bit_test
             -Dsonar.organization=imesh-bit
-            -Dsonar.sources=src
+     
 
-      - name: Generate PDF Report
-        run: |
-          npm install -g puppeteer-to-pdf
-          puppeteer-to-pdf https://sonarcloud.io/dashboard?id=imesh-bit_test -o sonarcloud_report.pdf
