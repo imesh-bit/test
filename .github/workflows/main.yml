@@ -20,25 +20,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Cache Gradle dependencies
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-
-      - name: Make gradlew executable
-        run: chmod +x gradlew
-
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
           java-version: '11'
 
-      - name: Build with Gradle
-        run: ./gradlew build -DskipTests
+      - name: Build with Maven
+        run: mvn clean install
 
       - name: Analyze with SonarCloud
         if: ${{ github.event_name != 'pull_request' }}
@@ -48,6 +37,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args:
-            -Dsonar.projectKey=imesh-bit_test
+            -Dsonar.projectKey=manushacampus_final_year_project_server
             -Dsonar.organization=manushacampus
             -X
